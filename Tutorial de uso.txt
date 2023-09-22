@@ -8,6 +8,7 @@ Digite 'npm install axios crypto express express-session mysql';
 Abra o XAMPP e dê start nos servidores apache e mysql;
 Abra o Workbench e crie uma conexão com o nome TechGreen;
 Abra a conexão e cole os seguintes comandos:
+Ou vá no arquivo db.txt e copie e cole todos os códigos
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE DATABASE GreenHub;
@@ -25,4 +26,6 @@ Dê CTRL + ENTER após cada ';';
 Vá no explorador de arquivos, na pasta que contém 'server.js';
 Clique na barra superior que contém o caminho do arquivo e o copie;
 
-Volte ao cmd, digite 'cd ' e clique com o botão direito para colar
+Volte ao cmd, digite 'cd ' e clique com o botão direito para colar e execute;
+
+Por fim dê "node server.js" e entre no seu navegador e digite "localhost:3000"
