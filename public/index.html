@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenHub</title>
+  <link rel="icon" href="/images/favicon_Greenhub.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="verificarTema()">
+
+  <!-- Menu Superior -->
+  <div class="container">
+    <div class="item">
+      <header>
+          <div class="logo">
+            <img src="/images/logo.png" alt="Logo da TechGree">
+          </div>
+          <img src="/images/menuGreenHub.png" alt="Menu" class="menu-button">
+        </div>
+      </header>
+    </div>
+  </div>
+
+    <div class="menu-list">
+      <div class="button2">
+        <a href="/cadastro/cadastro.html" class="btnCadastre2">Cadastre-se</a>
+          <a href="/login/login.html" class="btnLogin2">Entrar</a>
+      </div>
+      
+      <div class="links2">
+        <p>Se informe</p>
+        <ul id="links2">
+          <li><a href="/topicos/topicos.html">Confira alguns tópicos sobre assuntos a respeito do descarte eletrônico</a></li>
+        </ul>
+      </div>
+        <div class="contact2">
+          <p>Em busca</p>
+          <p>de um mundo</p>
+          <p>mais gr<span class="contactVerde1">e</span><span class="contactVerde2">e</span>n.</p>
+        </div>
+        <div class="links2">
+          <ul>
+            <li><a id="temaBotao" onclick="trocarTema()" style="cursor: pointer;">Tema Escuro</a></li>
+            <li><a href="/sobre/sobre.html">Sobre Nós</a></li>
+            <li><a href="/topicos/topicos.html">Tópicos</a></li>
+          </ul>
+        </div>
+        <div class="social-media2">
+          <ul>
+            <li><a href="#"><i class="fab fa-facebook-f"><img src="/images/facebook.png"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"><img src="/images/twitter.png"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"><img src="/images/instagram.png"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin"><img src="/images/gmail.png"></i></a></li>
+          </ul>
+        </div>
+        <a class="btnLogin2" onclick="logout()">Logout</a>
+        <div class="legal2">
+          <p>&copy; 2023 GreenHub. Todos os direitos reservados.</p>
+          <p><a href="/politicatermo/politicatermo.html">Política de Privacidade</a> | <a href="/politicatermo/politicatermo.html">Termos e Condições</a></p>
+        </div>
+    </div>
+
+  <!-- Imagem background landing page  -->
+  <div class="containerImagemFundo1">
+    <div class="overlayFundo">
+      <div class="overlay-text">
+      <h1 class="responsive-h1">Em busca de um mundo mais green</h1>
+        <h2 class="conferirColetas">
+          <a href="/mapa/mapa.html">
+        Conferir pontos de coleta
+      </a>
+        <img src="/images/mapa.png">
+        </h2>
+      
+    </div>
+    </div>
+     <div class="item">
+      <img src="/images/avenida.jpeg" class="imagemFundo1" id="avenidaCelular">
+    </div>
+  </div>
+ 
+  <p class="textoLand1">O desenvolvimento de produtos eletrônicos trouxe inúmeros benefícios para a qualidade de vida da população. No entanto, deve-se contrabalancear os impactos dos resíduos eletrônicos no meio ambiente. De acordo com a Diretiva 2002/96/CE do Parlamento Europeu e do Conselho, definem-se como Resíduos de Equipamentos Elétricos e Eletrônicos (REEE) aqueles que necessitam de correntes elétricas ou campos magnéticos para seu funcionamento. Também, incluem-se os equipamentos destinados à geração, transferência e medição de tais correntes e campos.</p>
+
+  <hr>
+
+  <h1 class="tituloLand1">O problema do lixo eletrônico</h1>
+  <p class="textoLand1">Por conterem metais pesados que podem ser altamente tóxicos na composição, os resíduos eletrônicos causam impactos ao meio ambiente. Caso a retenção de metais pesados pelo solo seja saturada, podem infiltrar e contaminar as águas subterrâneas. Ainda, os metais passam a fazer parte da cadeia alimentar, acumulando-se nos seres vivos. Portanto, de maneira alguma, os produtos eletrônicos devem ser descartados juntamente aos resíduos comuns. Pois, assim, seriam direcionados a aterros sanitários ou lixões, correndo risco de difundir a contaminação para grandes áreas, como rios, mares e vegetações.
+    Ao final, a fauna e flora são prejudicadas, bem como os recursos naturais locais e do entorno. Além disso, a saúde humana também é negativamente impactada. Ao absorver um elemento tóxico em concentrações elevadas, pode-se causar alteração no funcionamento do organismo. Ainda, pode-se associar às doenças respiratórias, neurológicas e reprodutivas. A absorção pode ocorrer via inalação, ingestão ou cutânea, mas a distribuição no organismo e seus efeitos dependem das propriedades dos elementos.
+    <img src="/images/problemaLixo.png" class="textoImg1">
+  </p>
+
+  <hr>
+
+  <h1 class="tituloLand1">Descarte, alternativas e suas vantagens</h1>
+  <p class="textoLand1">Conforme exposto, os resíduos eletrônicos apresentam em sua composição metais pesados que oferecem riscos ao meio ambiente e à saúde dos seres humanos. Sabe-se, então, que não se deve descartá-los de maneira comum aos outros tipos de resíduos que se tem em casa.
+    Segundo a Política Nacional de Resíduos Sólidos, entende-se por logística reserva o conjunto de ações, procedimentos e meios que possibilitam a coleta dos resíduos sólidos para reaproveitamento ou destinação final adequada. O decreto n.º 10.240 regulamenta a implementação do sistema de logística reversa de produtos eletroeletrônicos. 
+    A partir disso, o decreto estabelece que os produtos devem ser descartados pelos consumidores em pontos de entrega voluntária. Cabe ressaltar que não se deve desmontar os equipamentos para descarte. Também é importante seguir as recomendações dos fabricantes, pois, normalmente, eles possuem pontos de coleta em locais autorizados. Em seguida, os produtos devem ser transportados até pontos de consolidação e, se houver necessidade, para a destinação final adequada.
+    <img src="/images/descarte.png" class="textoImg1">
+  </p>
+
+  <hr>
+
+  <!-- Tentativa de fazer o parte do saiba mais com a imagem de fundo mantendo as "mesmas propriedades" do background 1 -->
+
+  <div class="containerImagemFundo2">
+    <div class="overlayFundo2">
+      <div class="overlay-text2">
+        <h1 class="responsive-h1">Saiba agora como e onde descartar </h1>
+        <h1 class="responsive-h2">Agora que você já sabe algumas coisas sobre a reciclagem de eltrônicos, seria uma boa
+          ideia começar a sua contribuição para você e para o mundo !</h1>
+        <h2 class="conferirColetas2">
+          <a href="/mapa/mapa.html">
+          Conferir pontos de coleta
+        </a>
+          <img src="/images/mapa.png">
+        </h2>
+      </div>
+    </div>
+    <div class="item">
+      <img src="/images/estacaoMove.png" class="imagemFundo2" id="avenidaCelular2">
+    </div>
+  </div>
+  <hr>
+
+  <!--
+  <form id="feedbackForm" action="/enviar-feedback" method="post">
+    <div class="feedback">
+      <h3 id="feed">Dê o seu Feedback!</h3>
+      <div class="ui huge star rating" name="nota" data-rating="0" data-max-rating="5"></div>
+      <br>
+      <div class="ui fluid input">
+        <input id="emailFeedback" type="email" name="email" placeholder="Insira seu email (Opcional)" maxlength="255">
+      </div>
+      <div class="ui fluid input">
+        <input id="textoFeedback" type="text" name="comentario" placeholder="Escreva um comentário (Opcional)" maxlength="255">
+      </div>
+      <button class="ui button smallButton" type="submit">Enviar</button>
+    </div>
+  </form>
+  -->
+
+  <h1 class="tituloFeedback">E aí, está satisfeito ?</h1>
+  <p class="textoFeedback">Estando tudo certo ou tudo errado, você pode nos enviar um feedback para entendermos o que
+    você achou do site. Contamos com sua ajuda :)</p>
+  <img class="imgFeedback" src="/images/imgFeedback.png">
+  <form id="feedbackForm" action="/enviar-feedback" method="post">
+    <div class="rating-container">
+      <div class="rating">
+        <input type="radio" id="star5" name="rating" value="5">
+        <label for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1"></label>
+      </div>
+    </div>
+
+    <div class="enviarFeedback">
+      <input type="email" id="emailFeedback" name="email" placeholder="Digite seu email aqui" maxlength="255">
+      
+      <input type="text" id="textoFeedback" name="comentario" placeholder="Digite seu feedback aqui" maxlength="255">
+      <button type="submit" class="arrow-button" id="btnFeedback"></button>
+    </div>
+  </form>
+  <hr>
+
+  <footer>
+    <div class="containerFooter">
+      <div class="logoFooter">
+        <img src="/images/logo.png" alt="Logo da sua marca">
+      </div>
+      <div class="links">
+        <ul>
+          <li><a href="/index.html">Página Inicial</a></li>
+          <li><a href="/sobre/sobre.html">Sobre Nós</a></li>
+          <li><a href="/topicos/topicos.html">Tópicos</a></li>
+        </ul>
+      </div>
+      <div class="contact">
+        <p>Em busca</p>
+        <p>de um mundo</p>
+        <p>mais gr<span class="contactVerde1">e</span><span class="contactVerde2">e</span>n.</p>
+      </div>
+      <div class="social-media">
+        <ul>
+          <li><a href="#"><i class="fab fa-facebook-f"><img src="/images/facebook.png"></i></a></li>
+          <li><a href="#"><i class="fab fa-twitter"><img src="/images/twitter.png"></i></a></li>
+          <li><a href="#"><i class="fab fa-instagram"><img src="/images/instagram.png"></i></a></li>
+          <li><a href="#"><i class="fab fa-linkedin"><img src="/images/gmail.png"></i></a></li>
+        </ul>
+      </div>
+      <div class="button">
+        <a href="/cadastro/cadastro.html" class="btnCadastre">Cadastre-se</a>
+        <a href="/login/login.html" class="btnLogin">Entrar</a>
+      </div>
+      <div class="legal">
+        <p>&copy; 2023 GreenHub. Todos os direitos reservados.</p>
+        <p><a href="/politicatermo/politicatermo.html">Política de Privacidade</a> | <a href="/politicatermo/politicatermo.html">Termos e Condições</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+<script src="script.js" defer></script>
+
+</html>
