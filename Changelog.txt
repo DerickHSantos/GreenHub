@@ -1,2 +1,10 @@
 v0.1
 Começo da base do projeto
+
+v0.2
+Separação entre login e cadastro de Pessoa Física, Empresa e Centro de Recilagem
+Falta criar as tabelas no db
+Criar rota de verificar cnpj
+Criar funções ou rotas de cadastro nas tabelas de Empresa e Centro de Recilagem
+
+Esqueceu a senha para empresas e centros

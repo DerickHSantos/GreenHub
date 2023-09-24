@@ -70,9 +70,9 @@
   }
 
   .imagemFundo1 {
+    /*margin-top: -23px;*/
     width: 100%;
     height: auto;
-    z-index: 2;
     opacity: 60%;
     display: block;
   }
@@ -803,17 +803,19 @@
   }
 
   .btnCadastre2 {
-    padding: 10px 20px;
+    /*padding: 10px 20px;*/
     color: #10ab6a;
     font-weight: 600;
     text-decoration: none;
     border-radius: 5px;
     text-align: center;
+    display: inline;
+    text-decoration: underline;
   }
 
   .btnLogin2 {
-    padding: 10px 40px;
-    margin: 10px 0px;
+    /*padding: 10px 40px;*/
+    /*margin: 10px 0px;*/
     background-color: #10ab6a;
     color: #fff;
     font-weight: 600;
@@ -824,6 +826,29 @@
     align-items: center;
     text-align: center;
     cursor: pointer;
+    display: inline;
+    text-decoration: underline;
+  }
+
+  .btnLogout2 {
+    padding: 7px 27px;
+    margin: 10px 2%;
+    background-color: #10ab6a;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    display: inline;
+  }
+
+  .hrTransparent{
+    color: transparent;
+    margin-top: -2%;
   }
 
   #links2{
@@ -881,3 +906,10 @@
       margin: 0;
     }
   }
+
+#bemVindo {
+  display:inline;
+  color: #FFB025;
+  font-size: 20px;
+  margin-bottom: -20px;
+}

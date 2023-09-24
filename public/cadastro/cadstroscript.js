@@ -5,8 +5,10 @@ $('.ui.dropdown').dropdown();
 //Inicialização da barra de pesquisa
 $('.ui.search').search();
 
+//Fazer um if para detectar se é pessoa fisica ou outros para fazer o insert com cpf ou cnpj porque fazer 3 funções dessas vai dar muitas linhas 
+
 //Cadastrar novos usuários no banco de dados
-document.getElementById("cadastroForm").addEventListener("submit", function(event) {
+document.getElementById("cadastroPessoaFisicaForm").addEventListener("submit", function(event) {
     event.preventDefault();
     //Verificar se o email já existe no banco de dados
     let email = document.getElementById("emailCadastro").value;
@@ -37,7 +39,7 @@ document.getElementById("cadastroForm").addEventListener("submit", function(even
             return;
           }
           //Continua com o envio do cadastro
-          fetch("/enviar-cadastro", {
+          fetch("/cadastroPessoaFisica", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
@@ -48,7 +50,7 @@ document.getElementById("cadastroForm").addEventListener("submit", function(even
             .then(data => {
               window.alert("Cadastro adicionado com sucesso!");
               document.getElementById("cadastroForm").reset();
-              document.location.href = "/login/login.html";
+              document.location.href = "/login/pessoaFisica.html";
             })
             .catch(error => {
               console.error("Erro ao adicionar cadastro.", error);

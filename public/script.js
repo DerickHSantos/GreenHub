@@ -1,4 +1,17 @@
 
+axios.get('/usuario')
+  .then(response => {
+    //Pegar o nome do usuário
+    const usuario = response.data;
+    const nomeUsuario = usuario.nomeUsuarios;
+    document.getElementById("bemVindo").textContent = ("Seja bem-vind@ " + nomeUsuario + "!");
+  })
+  .catch(error => {
+    //Se ocorrer um erro na requisição, exibir mensagem que nao esta logado
+    document.getElementById("bemVindo").textContent = "Você não está logado, por favor realize o login";
+  });
+
+
   document.addEventListener('DOMContentLoaded', function () {
 
     // Código das estrelas 

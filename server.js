@@ -83,7 +83,7 @@ app.post('/enviar-feedback', (req, res) => {
 });
 
 //Rota de enviar novos Cadastros
-app.post('/enviar-cadastro', (req, res) => {
+app.post('/cadastroPessoaFisica', (req, res) => {
   const { nome, email, cep, senha } = req.body;
   //criptografar senha
   const encryptedPassword = encryptPassword(senha);
@@ -104,13 +104,67 @@ app.post('/enviar-cadastro', (req, res) => {
 });
 
 //Rota de fazer Login
-app.post('/login', (req, res) => {
+app.post('/loginFisica', (req, res) => {
   const{ email, senha } = req.body;
   //criptografia
   const encryptedPassword = encryptPassword(senha);
 
   const sql = 'SELECT * FROM usuarios WHERE emailUsuarios = ? AND senhaUsuarios = ?';
   const values = [email, encryptedPassword];
+
+  db.query(sql, values, (err, results) => {
+    if (err) {
+      console.error('Erro ao consultar login:', err);
+      res.status(500).json({ error: 'Erro ao consultar login' });
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(401).json({ error: 'Credenciais inválidas' });
+    } else {
+      const usuario = results[0];
+
+      //Iniciar sessão
+      req.session.usuario = usuario;
+      res.status(200).json(usuario);
+    }
+  });
+});
+
+app.post('/loginEmpresa', (req, res) => {
+  const{ cnpj, senha } = req.body;
+  //criptografia
+  const encryptedPassword = encryptPassword(senha);
+
+  const sql = 'SELECT * FROM empresas WHERE cnpjEmpresas = ? AND senhaEmpresas = ?';
+  const values = [cnpj, encryptedPassword];
+
+  db.query(sql, values, (err, results) => {
+    if (err) {
+      console.error('Erro ao consultar login:', err);
+      res.status(500).json({ error: 'Erro ao consultar login' });
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(401).json({ error: 'Credenciais inválidas' });
+    } else {
+      const usuario = results[0];
+
+      //Iniciar sessão
+      req.session.usuario = usuario;
+      res.status(200).json(usuario);
+    }
+  });
+});
+
+app.post('/loginCentroReciclagem', (req, res) => {
+  const{ cnpj, senha } = req.body;
+  //criptografia
+  const encryptedPassword = encryptPassword(senha);
+
+  const sql = 'SELECT * FROM centroReciclagem WHERE cnpjCentroReciclagem = ? AND senhaCentroReciclagem = ?';
+  const values = [cnpj, encryptedPassword];
 
   db.query(sql, values, (err, results) => {
     if (err) {
