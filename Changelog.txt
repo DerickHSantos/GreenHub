@@ -8,3 +8,4 @@ Criar rota de verificar cnpj
 Criar funções ou rotas de cadastro nas tabelas de Empresa e Centro de Recilagem
 
 Esqueceu a senha para empresas e centros
+Falta combinar arquivos css duplicados
