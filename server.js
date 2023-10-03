@@ -167,7 +167,7 @@ app.post('/cadastroCentroReciclagem', (req, res) => {
 });
 
 //Rota de fazer Login
-app.post('/loginFisica', (req, res) => {
+app.post('/loginPessoaFisica', (req, res) => {
   const{ email, senha } = req.body;
   //criptografia
   const encryptedPassword = encryptPassword(senha);
@@ -200,6 +200,33 @@ app.post('/loginEmpresa', (req, res) => {
   const encryptedPassword = encryptPassword(senha);
 
   const sql = 'SELECT * FROM empresas WHERE cnpjEmpresas = ? AND senhaEmpresas = ?';
+  const values = [cnpj, encryptedPassword];
+
+  db.query(sql, values, (err, results) => {
+    if (err) {
+      console.error('Erro ao consultar login:', err);
+      res.status(500).json({ error: 'Erro ao consultar login' });
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(401).json({ error: 'Credenciais inválidas' });
+    } else {
+      const usuario = results[0];
+
+      //Iniciar sessão
+      req.session.usuario = usuario;
+      res.status(200).json(usuario);
+    }
+  });
+});
+
+app.post('/loginIndustria', (req, res) => {
+  const{ cnpj, senha } = req.body;
+  //criptografia
+  const encryptedPassword = encryptPassword(senha);
+
+  const sql = 'SELECT * FROM industria WHERE cnpjIndustria = ? AND senhaIndustria = ?';
   const values = [cnpj, encryptedPassword];
 
   db.query(sql, values, (err, results) => {
@@ -379,12 +406,87 @@ app.get('/pontos-coleta', (req, res) => {
   });
 });
 
-//Rota de redefinir senha
-app.post('/redefinir-senha', (req, res) => {
+//Rota de redefinir senha Pessoa Fisica
+app.post('/redefinirPessoaFisca', (req, res) => {
   const { email, senha, cep } = req.body;
   const sql = 'UPDATE usuarios SET senhaUsuarios = ? WHERE emailUsuarios = ? AND cepUsuarios = ?';
   const encryptedPassword = encryptPassword(senha);
   const values = [encryptedPassword, email, cep];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao redefinir senha:', err);
+      res.status(500).json({ error: 'Erro ao redefinir senha' });
+      return;
+    }
+
+    if (result.affectedRows === 0) {
+      console.log('Nenhuma senha redefinida no banco de dados');
+      res.status(400).json({ error: 'Falha ao redefinir senha. Verifique as credenciais fornecidas.' });
+      return;
+    }
+
+    console.log('Senha redefinida no banco de dados');
+    res.status(200).json({ message: 'Senha redefinida com sucesso' });
+  });
+});
+
+//Rota de redefinir senha Empresa
+app.post('/redefinirEmpresa', (req, res) => {
+  const { cnpj, senha, cep } = req.body;
+  const sql = 'UPDATE empresa SET senhaEmpresa = ? WHERE cnpjEmpresa = ? AND cepEmpresa = ?';
+  const encryptedPassword = encryptPassword(senha);
+  const values = [encryptedPassword, cnpj, cep];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao redefinir senha:', err);
+      res.status(500).json({ error: 'Erro ao redefinir senha' });
+      return;
+    }
+
+    if (result.affectedRows === 0) {
+      console.log('Nenhuma senha redefinida no banco de dados');
+      res.status(400).json({ error: 'Falha ao redefinir senha. Verifique as credenciais fornecidas.' });
+      return;
+    }
+
+    console.log('Senha redefinida no banco de dados');
+    res.status(200).json({ message: 'Senha redefinida com sucesso' });
+  });
+});
+
+//Rota de redefinir senha Industria
+app.post('/redefinirIndustria', (req, res) => {
+  const { cnpj, senha, cep } = req.body;
+  const sql = 'UPDATE industria SET senhaIndustria = ? WHERE cnpjIndustria = ? AND cepIndustria = ?';
+  const encryptedPassword = encryptPassword(senha);
+  const values = [encryptedPassword, cnpj, cep];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao redefinir senha:', err);
+      res.status(500).json({ error: 'Erro ao redefinir senha' });
+      return;
+    }
+
+    if (result.affectedRows === 0) {
+      console.log('Nenhuma senha redefinida no banco de dados');
+      res.status(400).json({ error: 'Falha ao redefinir senha. Verifique as credenciais fornecidas.' });
+      return;
+    }
+
+    console.log('Senha redefinida no banco de dados');
+    res.status(200).json({ message: 'Senha redefinida com sucesso' });
+  });
+});
+
+//Rota de redefinir senha Centro Reciclagem
+app.post('/redefinirCentroReciclagem', (req, res) => {
+  const { cnpj, senha, cep } = req.body;
+  const sql = 'UPDATE centroReciclagem SET senhaCentroReciclagem = ? WHERE cnpjCentroReciclagem = ? AND cepCentroReciclagem = ?';
+  const encryptedPassword = encryptPassword(senha);
+  const values = [encryptedPassword, cnpj, cep];
 
   db.query(sql, values, (err, result) => {
     if (err) {

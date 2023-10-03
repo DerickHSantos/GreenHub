@@ -1,19 +1,12 @@
-//Menu
-//Inicialização do menu dropdown
-$('.ui.dropdown').dropdown();
-
-//Inicialização da barra de pesquisa
-$('.ui.search').search();
-
 //Pegar do form
-document.getElementById("loginFisicaForm").addEventListener("submit", function(event) {
+document.getElementById("loginPessoaFisicaForm").addEventListener("submit", function(event) {
     event.preventDefault();
   
     let email = document.getElementById("emailLogin").value;
     let senha = document.getElementById("senhaLogin").value;
   
     //Enviar requisição POST para a rota "/login" no servidor Node.js
-    fetch("/loginFisica", {
+    fetch("/loginPessoaFisica", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -36,11 +29,10 @@ document.getElementById("loginFisicaForm").addEventListener("submit", function(e
         console.error("Erro ao fazer login:", error);
         window.alert("Credenciais inválidas. Por favor, tente novamente.");
         console.log(email, senha)
-        document.getElementById("loginForm").reset();
       });
   });
     
-  /*document.getElementById("loginEmpresaForm").addEventListener("submit", function(event) {
+  document.getElementById("loginEmpresaForm").addEventListener("submit", function(event) {
     event.preventDefault();
   
     let cnpj = document.getElementById("cnpjLogin").value;
@@ -53,7 +45,7 @@ document.getElementById("loginFisicaForm").addEventListener("submit", function(e
         "Content-Type": "application/json"
       },
       //Converter
-      body: JSON.stringify({ email, senha })
+      body: JSON.stringify({ cnpj, senha })
     })
       .then(response => {
         if (!response.ok) {
@@ -69,11 +61,42 @@ document.getElementById("loginFisicaForm").addEventListener("submit", function(e
       .catch(error => {
         console.error("Erro ao fazer login:", error);
         window.alert("Credenciais inválidas. Por favor, tente novamente.");
-        document.getElementById("loginForm").reset();
       });
-  });*/
+  });
 
-  /*document.getElementById("loginCentroReciclagemForm").addEventListener("submit", function(event) {
+  document.getElementById("loginIndustriaForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+  
+    let cnpj = document.getElementById("cnpjLogin").value;
+    let senha = document.getElementById("senhaLogin").value;
+  
+    //Enviar requisição POST para a rota "/login" no servidor Node.js
+    fetch("/loginIndustria", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      //Converter
+      body: JSON.stringify({ cnpj, senha })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Credenciais inválidas");
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert("Login feito com sucesso!")
+        //Volta para página inicial
+        document.location.href = "/index.html";
+      })
+      .catch(error => {
+        console.error("Erro ao fazer login:", error);
+        window.alert("Credenciais inválidas. Por favor, tente novamente.");
+      });
+  });
+
+  document.getElementById("loginCentroReciclagemForm").addEventListener("submit", function(event) {
     event.preventDefault();
   
     let cnpj = document.getElementById("cnpjLogin").value;
@@ -86,7 +109,7 @@ document.getElementById("loginFisicaForm").addEventListener("submit", function(e
         "Content-Type": "application/json"
       },
       //Converter
-      body: JSON.stringify({ email, senha })
+      body: JSON.stringify({ cnpj, senha })
     })
       .then(response => {
         if (!response.ok) {
@@ -102,9 +125,8 @@ document.getElementById("loginFisicaForm").addEventListener("submit", function(e
       .catch(error => {
         console.error("Erro ao fazer login:", error);
         window.alert("Credenciais inválidas. Por favor, tente novamente.");
-        document.getElementById("loginForm").reset();
       });
-  });*/
+  });
 
 //Setar tema Claro como padrão
 function verificarTema(){

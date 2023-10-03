@@ -1,19 +1,12 @@
-//Menu
-//Inicialização do menu dropdown
-$('.ui.dropdown').dropdown();
-
-//Inicialização da barra de pesquisa
-$('.ui.search').search();
-
 //Pegar do form
-  document.getElementById("redefinirForm").addEventListener("submit", function(event) {
+  document.getElementById("redefinirPessoaFisicaForm").addEventListener("submit", function(event) {
     event.preventDefault();
     let email = document.getElementById("redefinirEmail").value;
     let cep = document.getElementById("redefinirCep").value;
     let senha = document.getElementById("redefinirSenha").value;
 
-    //Rota de redefinir senha com dupla verificação de email e cep
-    fetch("/redefinir-senha", {
+    //Rota de redefinir senha para pessoa física
+    fetch("/redefinirPessoaFisica", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -29,7 +22,7 @@ $('.ui.search').search();
       .then(data => {
         if (data.message === "Senha redefinida com sucesso") {
             alert("Senha redefinida com sucesso!");
-            document.location.href = "/login/login.html";
+            document.location.href = "/login/pessoaFisica.html";
           } else {
             throw new Error("Erro ao redefinir senha");
           }
@@ -37,7 +30,111 @@ $('.ui.search').search();
       .catch(error => {
         console.error("Erro ao redefinir senha:", error);
         window.alert("Credenciais inválidas. Por favor, tente novamente.");
-        document.getElementById("redefinirForm").reset();
+    });
+  })
+
+  //Pegar do form
+  document.getElementById("redefinirEmpresaForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    let cnpj = document.getElementById("redefinirCNPJ").value;
+    let cep = document.getElementById("redefinirCep").value;
+    let senha = document.getElementById("redefinirSenha").value;
+
+    //Rota de redefinir senha para Empresa
+    fetch("/redefinirEmpresa", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({cnpj, senha, cep})
+    })
+    .then(response => {
+        if (!response.ok) {
+          throw new Error("Credenciais inválidas");
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.message === "Senha redefinida com sucesso") {
+            alert("Senha redefinida com sucesso!");
+            document.location.href = "/login/empresa.html";
+          } else {
+            throw new Error("Erro ao redefinir senha");
+          }
+      })
+      .catch(error => {
+        console.error("Erro ao redefinir senha:", error);
+        window.alert("Credenciais inválidas. Por favor, tente novamente.");
+    });
+  })
+
+    //Pegar do form
+    document.getElementById("redefinirIndustriaForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      let cnpj = document.getElementById("redefinirCNPJ").value;
+      let cep = document.getElementById("redefinirCep").value;
+      let senha = document.getElementById("redefinirSenha").value;
+  
+      //Rota de redefinir senha para Industria
+      fetch("/redefinirIndustria", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({cnpj, senha, cep})
+      })
+      .then(response => {
+          if (!response.ok) {
+            throw new Error("Credenciais inválidas");
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.message === "Senha redefinida com sucesso") {
+              alert("Senha redefinida com sucesso!");
+              document.location.href = "/login/industria.html";
+            } else {
+              throw new Error("Erro ao redefinir senha");
+            }
+        })
+        .catch(error => {
+          console.error("Erro ao redefinir senha:", error);
+          window.alert("Credenciais inválidas. Por favor, tente novamente.");
+      });
+    })
+
+      //Pegar do form
+  document.getElementById("redefinirCentroReciclagemForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    let cnpj = document.getElementById("redefinirCNPJ").value;
+    let cep = document.getElementById("redefinirCep").value;
+    let senha = document.getElementById("redefinirSenha").value;
+
+    //Rota de redefinir senha para pessoa física
+    fetch("/redefinirCentroReciclagem", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({cnpj, senha, cep})
+    })
+    .then(response => {
+        if (!response.ok) {
+          throw new Error("Credenciais inválidas");
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.message === "Senha redefinida com sucesso") {
+            alert("Senha redefinida com sucesso!");
+            document.location.href = "/login/centroReciclagem.html";
+          } else {
+            throw new Error("Erro ao redefinir senha");
+          }
+      })
+      .catch(error => {
+        console.error("Erro ao redefinir senha:", error);
+        window.alert("Credenciais inválidas. Por favor, tente novamente.");
     });
   })
 
