@@ -13,6 +13,7 @@ menuButton.addEventListener('click', function() {
     // Pegar o cep do usuário
     const usuario = response.data;
     const cepUsuario = usuario.cepUsuarios;
+    console.log("1")
 
     //inicia o mapa
     initMap(cepUsuario); 
@@ -81,7 +82,7 @@ function addPontosColetaAoMapa(pontosColeta) {
       throw new Error('CEP não informado');
     }
 
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${cep}&key=AIzaSyBcvGFK7tDzC21apkaruZpGlMJgROyXphU `;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${cep}&key=AIzaSyBcvGFK7tDzC21apkaruZpGlMJgROyXphU`;
 
     return axios.get(url)
     

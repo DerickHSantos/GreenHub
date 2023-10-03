@@ -1,14 +1,18 @@
 
 axios.get('/usuario')
   .then(response => {
+    document.getElementById("logout").style.display = "flex";
+
     //Pegar o nome do usuário
     const usuario = response.data;
     const nomeUsuario = usuario.nomeUsuarios;
     document.getElementById("bemVindo").textContent = ("Seja bem-vind@ " + nomeUsuario + "!");
+    //document.getElementsByClassName("links2").style.display = "none";    
+    document.getElementById("links").style.display = "none";
   })
   .catch(error => {
+    console.log(usuario);
     //Se ocorrer um erro na requisição, exibir mensagem que nao esta logado
-    document.getElementById("bemVindo").textContent = "Você não está logado, por favor realize o login";
   });
 
 
@@ -72,9 +76,9 @@ axios.get('/usuario')
   menuButton.addEventListener('click', function() {
     imgFundo.style.display = (imgFundo.style.display === 'none') ? 'block' : 'none';
     if(imgFundo.style.display === 'block'){
-      menuList.style.padding = 0;
+      menuList.style.padding = '0';
     }else if(imgFundo.style.display === 'none'){
-      menuList.style.padding = '3%';
+      menuList.style.padding = '1%';
     }
     menuList.classList.toggle('open'); 
   });

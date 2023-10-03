@@ -1,13 +1,15 @@
 CREATE DATABASE GreenHub;
+DROP DATABASE GreenHub;
 USE GreenHub;
 
-CREATE TABLE feedbacks (id INT AUTO_INCREMENT PRIMARY KEY, email VARCHAR(255), nota INTEGER, comentario VARCHAR(255));
-CREATE TABLE usuarios (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(255), email VARCHAR(255), cep INTEGER(8), senha VARCHAR(255), isAdmin BOOL);
-CREATE TABLE pontosColeta (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(255), cep INTEGER(8));
+CREATE TABLE feedbacks (idFeedbacks INT AUTO_INCREMENT PRIMARY KEY, emailFeedbacks VARCHAR(255), notaFeedbacks INTEGER, comentarioFeedbacks VARCHAR(255));
+CREATE TABLE usuarios (idUsuarios INT AUTO_INCREMENT PRIMARY KEY, nomeUsuarios VARCHAR(255), emailUsuarios VARCHAR(255), cepUsuarios INTEGER(8), senhaUsuarios VARCHAR(255), isAdmin BOOL);
+CREATE TABLE pontosColeta (idPontosColeta INT AUTO_INCREMENT PRIMARY KEY, nomePontosColeta VARCHAR(255), cepPontosColeta INTEGER(8));
 
-INSERT INTO usuarios (nome, email, cep, senha, isAdmin) VALUES ("Admin", "admin@admin.com", "33902570", "7bfbbeb5950a55a2ebc0b150ad7544ac", true);
+INSERT INTO usuarios (nomeUsuarios, emailUsuarios, cepUsuarios, senhaUsuarios, isAdmin) 
+VALUES ("Admin", "admin@admin.com", "33902570", "0a6afbeab59a682a0cb0e9187d1cdaca", true);
 
-insert into pontosColeta (nome, cep) values
+insert into pontosColeta (nomePontosColeta, cepPontosColeta) values
 ("Loja Vivo / Loja Claro - Shopping Cidade", "30190060"),
 ("Loja Vivo", "30130002"),
 ("Magazine Luiza", "30170120"),

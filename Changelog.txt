@@ -9,3 +9,6 @@ Criar funções ou rotas de cadastro nas tabelas de Empresa e Centro de Recilage
 
 Esqueceu a senha para empresas e centros
 Falta combinar arquivos css duplicados
+
+v0.2.1
+Mudado nome de usuario login

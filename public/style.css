@@ -621,6 +621,7 @@
   }
 
   .btnCadastre {
+
     padding: 10px 20px;
     color: #10ab6a;
     font-weight: 600;
@@ -690,7 +691,8 @@
   .menu-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content:center;
+    /*justify-content:center;*/
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     background-color: #0b302b;
@@ -699,10 +701,12 @@
     height: 0;
     overflow: hidden;
     transition: height 0.3s ease;
+    padding: -50%;
   }
   
   .menu-list.open {
-    height: 275px; /* Defina o valor apropriado para a altura do menu */
+    height: fit-content; /* Defina o valor apropriado para a altura do menu */
+    padding: -1%;
   }
   
   .menu-list li {
@@ -719,6 +723,12 @@
     cursor: pointer;
   }
 
+  #links2{
+    text-align: right;
+    color:#fff;
+    float: left;
+  }
+
   .links2 p{
     font-weight: 600;
     font-size: large;
@@ -732,8 +742,6 @@
     margin: 0;
     margin-bottom: 10px;
   }
-
- 
 
   .links2 ul li {
     display: inline;
@@ -803,11 +811,12 @@
   }
 
   .btnCadastre2 {
+    border: 1px solid #10ab6a;
+    border-radius: 20px;
     /*padding: 10px 20px;*/
     color: #10ab6a;
     font-weight: 600;
     text-decoration: none;
-    border-radius: 5px;
     text-align: center;
     display: inline;
     text-decoration: underline;
@@ -831,6 +840,7 @@
   }
 
   .btnLogout2 {
+    display: none;
     padding: 7px 27px;
     margin: 10px 2%;
     background-color: #10ab6a;
@@ -838,22 +848,15 @@
     font-weight: 600;
     text-decoration: none;
     border-radius: 20px;
-    display:flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     cursor: pointer;
-    display: inline;
   }
 
   .hrTransparent{
     color: transparent;
     margin-top: -2%;
-  }
-
-  #links2{
-    color:#fff;
-
   }
 
   /* Estilos para telas menores que 768px */
@@ -872,10 +875,6 @@
 
     .button2 {
       text-align: center;
-    }
-
-    .menu-list.open {
-      height: 675px; /* Defina o valor apropriado para a altura do menu */
     }
 
     #links2 li{
@@ -908,8 +907,8 @@
   }
 
 #bemVindo {
-  display:inline;
-  color: #FFB025;
+  display: inline;
+  color: #10db6f !important;
   font-size: 20px;
-  margin-bottom: -20px;
+  /*margin-bottom: -20px;*/
 }
