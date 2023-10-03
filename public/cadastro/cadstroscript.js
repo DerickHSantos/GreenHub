@@ -1,13 +1,9 @@
-//Menu
-//Inicialização do menu dropdown
-$('.ui.dropdown').dropdown();
+function validarNumero(input) {
+  // Remove caracteres não numéricos usando expressão regular
+  input.value = input.value.replace(/[^0-9]/g, '');
+}
 
-//Inicialização da barra de pesquisa
-$('.ui.search').search();
-
-//Fazer um if para detectar se é pessoa fisica ou outros para fazer o insert com cpf ou cnpj porque fazer 3 funções dessas vai dar muitas linhas 
-
-//Cadastrar novos usuários no banco de dados
+//Cadastrar novos usuários Pessoa Física no banco de dados
 document.getElementById("cadastroPessoaFisicaForm").addEventListener("submit", function(event) {
     event.preventDefault();
     //Verificar se o email já existe no banco de dados
@@ -49,23 +45,194 @@ document.getElementById("cadastroPessoaFisicaForm").addEventListener("submit", f
             .then(response => response.json())
             .then(data => {
               window.alert("Cadastro adicionado com sucesso!");
-              document.getElementById("cadastroForm").reset();
+              document.getElementById("cadastroPessoaFisicaForm").reset();
               document.location.href = "/login/pessoaFisica.html";
             })
             .catch(error => {
               console.error("Erro ao adicionar cadastro.", error);
               window.alert("Erro ao enviar cadastro, por favor tente novamente.");
-              document.getElementById("cadastroForm").reset();
             });
         })
         .catch(error => {
           console.error("Erro ao verificar CEP.", error);
           window.alert("Erro ao verificar CEP, por favor tente novamente.");
-          document.getElementById("cadastroForm").reset();
         });
     }
   })});
+
+    //Cadastrar novos usuários Empresa no banco de dados
+document.getElementById("cadastroEmpresaForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  //Verificar se o email já existe no banco de dados
+  let cnpj = document.getElementById("cnpjCadastro").value;
+  let table = "empresa"
+  fetch("/verificar-cnpj", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      //Converter para enviar
+      body: JSON.stringify({ cnpj, table })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.cnpjExists) {
+          alert("O CNPJ inserido já está cadastrado. Por favor, tente realizar o login.");
+      } else {
+
+    let nome = document.getElementById("nomeCadastro").value;
+    let senha = document.getElementById("senhaCadastro").value;
+
+    //Verificar se o CEP foi inserido corretamente e se pode ser encontrado
+    let cep = document.getElementById("cepCadastro").value;
+    pesquisacep(cep)
+      .then((cepError) => {
+        console.log(cepError);
+        if (cepError) {
+          alert("Cep não encontrado!");
+          return;
+        }
+        //Continua com o envio do cadastro
+        fetch("/cadastroEmpresa", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ nome, email, senha, cep })
+          })
+          .then(response => response.json())
+          .then(data => {
+            window.alert("Cadastro adicionado com sucesso!");
+            document.getElementById("cadastroEmpresaForm").reset();
+            document.location.href = "/login/Empresa.html";
+          })
+          .catch(error => {
+            console.error("Erro ao adicionar cadastro.", error);
+            window.alert("Erro ao enviar cadastro, por favor tente novamente.", error);
+          });
+      })
+      .catch(error => {
+        console.error("Erro ao verificar CEP.", error);
+        window.alert("Erro ao verificar CEP, por favor tente novamente.");
+      });
+  }
+})});
   
+  //Cadastrar novos usuários Indústria no banco de dados
+document.getElementById("cadastroIndustriaForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  //Verificar se o email já existe no banco de dados
+  let cnpj = document.getElementById("cnpjCadastro").value;
+  let table = "industria"
+  fetch("/verificar-cnpj", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      //Converter para enviar
+      body: JSON.stringify({ cnpj, table })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.cnpjExists) {
+          alert("O CNPJ inserido já está cadastrado. Por favor, tente realizar o login.");
+      } else {
+
+    let nome = document.getElementById("nomeCadastro").value;
+    let senha = document.getElementById("senhaCadastro").value;
+
+    //Verificar se o CEP foi inserido corretamente e se pode ser encontrado
+    let cep = document.getElementById("cepCadastro").value;
+    pesquisacep(cep)
+      .then((cepError) => {
+        console.log(cepError);
+        if (cepError) {
+          alert("Cep não encontrado!");
+          return;
+        }
+        //Continua com o envio do cadastro
+        fetch("/cadastroIndustria", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ nome, email, senha, cep })
+          })
+          .then(response => response.json())
+          .then(data => {
+            window.alert("Cadastro adicionado com sucesso!");
+            document.getElementById("cadastroIndustriaForm").reset();
+            document.location.href = "/login/industria.html";
+          })
+          .catch(error => {
+            console.error("Erro ao adicionar cadastro.", error);
+            window.alert("Erro ao enviar cadastro, por favor tente novamente.", error);
+          });
+      })
+      .catch(error => {
+        console.error("Erro ao verificar CEP.", error);
+        window.alert("Erro ao verificar CEP, por favor tente novamente.");
+      });
+  }
+})});
+
+  //Cadastrar novos usuários Centro de Reciclagem no banco de dados
+  document.getElementById("cadastroCentroReciclagemForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    //Verificar se o email já existe no banco de dados
+    let cnpj = document.getElementById("cnpjCadastro").value;
+    let table = "centroReciclagem"
+    fetch("/verificar-cnpj", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        //Converter para enviar
+        body: JSON.stringify({ cnpj, table })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.cnpjExists) {
+            alert("O CNPJ inserido já está cadastrado. Por favor, tente realizar o login.");
+        } else {
+  
+      let nome = document.getElementById("nomeCadastro").value;
+      let senha = document.getElementById("senhaCadastro").value;
+  
+      //Verificar se o CEP foi inserido corretamente e se pode ser encontrado
+      let cep = document.getElementById("cepCadastro").value;
+      pesquisacep(cep)
+        .then((cepError) => {
+          console.log(cepError);
+          if (cepError) {
+            alert("Cep não encontrado!");
+            return;
+          }
+          //Continua com o envio do cadastro
+          fetch("/cadastroIndustria", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ nome, email, senha, cep })
+            })
+            .then(response => response.json())
+            .then(data => {
+              window.alert("Cadastro adicionado com sucesso!");
+              document.getElementById("cadastroCentroReciclagemForm").reset();
+              document.location.href = "/login/industria.html";
+            })
+            .catch(error => {
+              console.error("Erro ao adicionar cadastro.", error);
+              window.alert("Erro ao enviar cadastro, por favor tente novamente.", error);
+            });
+        })
+        .catch(error => {
+          console.error("Erro ao verificar CEP.", error);
+          window.alert("Erro ao verificar CEP, por favor tente novamente.");
+        });
+    }
+  })});
   
 //Verificar CEP
 //Via CEP

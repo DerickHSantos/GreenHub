@@ -33,14 +33,20 @@
           <ul id="links2">
             <hr class="hrTransparent">
             <li>
-              <a class="btnLogin2" href="/login/pessoaFisica.html">Pessoa Física</a>
-              <a class="btnCadastre2" href="/login/empresa.html">Empresa</a>
-              <a class="btnLogin2" href="/login/industria.html">Indústria </a>
-              <a class="btnCadastre2" href="/login/centroReciclagem.html">Centro de Reciclagem</a>
+              <a class="btnLogin2" id="PessoaFisica" onmouseenter="abrirPopUp(this)">Pessoa Física</a>
+              <a class="btnCadastre2" id="Empresa" onmouseenter="abrirPopUp(this)">Empresa</a>
+              <a class="btnLogin2" id="Industria" onmouseenter="abrirPopUp(this)">Indústria </a>
+              <a class="btnCadastre2" id="CentroReciclagem" onmouseenter="abrirPopUp(this)">Centro de Reciclagem</a>
             </li>
           </ul>
-        </div>
+
+          </div>
+          
       </div>
+      <div id="popUpPessoaFisica" style="display: none;"><span class="popUp"><a href="/login/pessoaFisica.html" class="btnPopUp">Login</a>&nbsp&nbsp&nbsp<a href="/cadastro/pessoaFisica.html" class="btnPopUp">Cadastro</a></span></div>
+      <div id="popUpEmpresa" style="display: none;"><span class="popUp"><a href="/login/empresa.html" class="btnPopUp">Login</a>&nbsp&nbsp&nbsp<a href="/cadastro/empresa.html" class="btnPopUp">Cadastro</a></span></div>
+      <div id="popUpIndustria" style="display: none;"><span class="popUp"><a href="/login/industria.html" class="btnPopUp">Login</a>&nbsp&nbsp&nbsp<a href="/cadastro/industria.html" class="btnPopUp">Cadastro</a></span></div>
+      <div id="popUpCentroReciclagem" style="display: none;"><span class="popUp"><a href="/login/centroReciclagem.html" class="btnPopUp">Login</a>&nbsp&nbsp&nbsp<a href="/cadastro/centroReciclagem.html" class="btnPopUp">Cadastro</a></span></div>
         <a id="logout" class="btnLogout2" onclick="logout()">Logout</a>
 
         <div class="links2">

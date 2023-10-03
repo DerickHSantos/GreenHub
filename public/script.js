@@ -1,3 +1,28 @@
+let popUpAberto = null; // Armazena o ID do pop-up atualmente aberto
+
+function abrirPopUp(botao) {
+    // Fechar o pop-up atual antes de abrir um novo
+    if (popUpAberto) {
+        fecharPopUp(popUpAberto);
+    }
+
+    let popUpId = "popUp" + botao.id;
+    let popUp = document.getElementById(popUpId);
+    popUp.style.display = "grid";
+    popUp.style.opacity = 1;
+    popUpAberto = popUpId; // Atualiza o pop-up atualmente aberto
+
+    // Agendar fechamento do pop-up após 3 segundos
+    setTimeout(function () {
+        fecharPopUp(popUpAberto);
+    }, 3000);
+}
+
+function fecharPopUp(popUpId) {
+    let popUp = document.getElementById(popUpId);
+    popUp.style.display = "none";
+    popUpAberto = null; // Nenhum pop-up aberto após fechar
+}
 
 axios.get('/usuario')
   .then(response => {
@@ -7,7 +32,6 @@ axios.get('/usuario')
     const usuario = response.data;
     const nomeUsuario = usuario.nomeUsuarios;
     document.getElementById("bemVindo").textContent = ("Seja bem-vind@ " + nomeUsuario + "!");
-    //document.getElementsByClassName("links2").style.display = "none";    
     document.getElementById("links").style.display = "none";
   })
   .catch(error => {

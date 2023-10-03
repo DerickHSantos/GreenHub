@@ -12,3 +12,11 @@ Falta combinar arquivos css duplicados
 
 v0.2.1
 Mudado nome de usuario login
+Correção de bug no mapa
+Adicionado nome de usuário an barra de menu
+
+v0.3 
+Adicionado popup para fazer login ou cadastro
+Supostamente as rotas de cadastro dos 4 tipos de usuarios estão funcionando
+Adicionadas páginas de login e cadastro para industria, empresa e centro de reciclagem
+Falta - Adicionar todas as anterirores no banco de dados

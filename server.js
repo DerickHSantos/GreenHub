@@ -82,7 +82,7 @@ app.post('/enviar-feedback', (req, res) => {
   });
 });
 
-//Rota de enviar novos Cadastros
+//Rota de enviar novos Cadastros Pessoa Fisica
 app.post('/cadastroPessoaFisica', (req, res) => {
   const { nome, email, cep, senha } = req.body;
   //criptografar senha
@@ -90,6 +90,69 @@ app.post('/cadastroPessoaFisica', (req, res) => {
 
   const sql = 'INSERT INTO usuarios (nomeUsuarios, emailUsuarios, cepUsuarios, senhaUsuarios) VALUES (?, ?, ?, ?)';
   const values = [nome, email, cep, encryptedPassword];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao inserir dados no banco de dados:', err);
+      res.status(500).json({ error: 'Erro ao enviar dados de pc' });
+      return;
+    }
+
+    console.log('Dados de usuario inseridos no banco de dados');
+    res.status(200).json({ message: 'Dados de usuario enviados com sucesso' });
+  });
+});
+
+//Rota de enviar novos Cadastros Industria
+app.post('/cadastroIndustria', (req, res) => {
+  const { nome, cnpj, cep, senha } = req.body;
+  //criptografar senha
+  const encryptedPassword = encryptPassword(senha);
+
+  const sql = 'INSERT INTO industria (nomeIndustria, cnpjIndustria, cepIndustria, senhaIndustria) VALUES (?, ?, ?, ?)';
+  const values = [nome, cnpj, cep, encryptedPassword];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao inserir dados no banco de dados:', err);
+      res.status(500).json({ error: 'Erro ao enviar dados de pc' });
+      return;
+    }
+
+    console.log('Dados de usuario inseridos no banco de dados');
+    res.status(200).json({ message: 'Dados de usuario enviados com sucesso' });
+  });
+});
+
+//Rota de enviar novos Cadastros Empresa
+app.post('/cadastroEmpresa', (req, res) => {
+  const { nome, cnpj, cep, senha } = req.body;
+  //criptografar senha
+  const encryptedPassword = encryptPassword(senha);
+
+  const sql = 'INSERT INTO empresa (nomeEmpresa, cnpjEmpresa, cepEmpresa, senhaEmpresa) VALUES (?, ?, ?, ?)';
+  const values = [nome, cnpj, cep, encryptedPassword];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao inserir dados no banco de dados:', err);
+      res.status(500).json({ error: 'Erro ao enviar dados de pc' });
+      return;
+    }
+
+    console.log('Dados de usuario inseridos no banco de dados');
+    res.status(200).json({ message: 'Dados de usuario enviados com sucesso' });
+  });
+});
+
+//Rota de enviar novos Cadastros Centro de Reciclagem
+app.post('/cadastroCentroReciclagem', (req, res) => {
+  const { nome, cnpj, cep, senha } = req.body;
+  //criptografar senha
+  const encryptedPassword = encryptPassword(senha);
+
+  const sql = 'INSERT INTO centroReciclagem (nomeCentroReciclagem, cnpjCentroReciclagem, cepCentroReciclagem, senhaCentroReciclagem) VALUES (?, ?, ?, ?)';
+  const values = [nome, cnpj, cep, encryptedPassword];
 
   db.query(sql, values, (err, result) => {
     if (err) {
@@ -185,6 +248,33 @@ app.post('/loginCentroReciclagem', (req, res) => {
   });
 });
 
+app.post('/loginIndustria', (req, res) => {
+  const{ cnpj, senha } = req.body;
+  //criptografia
+  const encryptedPassword = encryptPassword(senha);
+
+  const sql = 'SELECT * FROM industria WHERE cnpjIndustria = ? AND senhaIndustria = ?';
+  const values = [cnpj, encryptedPassword];
+
+  db.query(sql, values, (err, results) => {
+    if (err) {
+      console.error('Erro ao consultar login:', err);
+      res.status(500).json({ error: 'Erro ao consultar login' });
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(401).json({ error: 'Credenciais inválidas' });
+    } else {
+      const usuario = results[0];
+
+      //Iniciar sessão
+      req.session.usuario = usuario;
+      res.status(200).json(usuario);
+    }
+  });
+});
+
 //Rota de Verificar se email existe no db
 app.post('/verificar-email', (req, res) => {
   const { email } = req.body;
@@ -202,6 +292,29 @@ app.post('/verificar-email', (req, res) => {
     const emailExists = count > 0;
 
     res.status(200).json({ emailExists });
+  });
+});
+
+//Rota de Verificar se cnpj existe no db
+app.post('/verificar-cnpj', (req, res) => {
+  //Obtem o cnpj e a tabela que haverá a busca
+  const { cnpj, table } = req.body;
+  //Obtem a tupla que será pesquisada
+  const column = ("cnpj" + table);
+  const sql = 'SELECT COUNT(*) AS count FROM ? WHERE ? = ?';
+  const values = [table, column, cnpj];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao consultar email no banco de dados:', err);
+      res.status(500).json({ error: 'Erro ao verificar email' });
+      return;
+    }
+
+    const count = result[0].count;
+    const cnpjExists = count > 0;
+
+    res.status(200).json({ cnpjExists });
   });
 });
 

@@ -819,7 +819,6 @@
     text-decoration: none;
     text-align: center;
     display: inline;
-    text-decoration: underline;
   }
 
   .btnLogin2 {
@@ -836,7 +835,6 @@
     text-align: center;
     cursor: pointer;
     display: inline;
-    text-decoration: underline;
   }
 
   .btnLogout2 {
@@ -890,6 +888,7 @@
   @media screen and (max-width: 480px) {
 
     .btnCadastre2,
+    .btnPopUp,
     .btnLogin2 {
       padding: 10px 15px;
       margin: 10 0px;
@@ -911,4 +910,45 @@
   color: #10db6f !important;
   font-size: 20px;
   /*margin-bottom: -20px;*/
+}
+
+#popUpPessoaFisica {
+  margin-left: -61%;
+}
+
+#popUpEmpresa{
+  margin-left: -26%;
+}
+
+#popUpIndustria{
+  margin-left: 2%;
+}
+
+#popUpCentroReciclagem{
+  margin-left: 45.2%;
+}
+
+.popUp {
+  border: 1.33px solid #10ab6a;
+  border-radius: 17px;
+  margin: 1%;
+  padding: 2%;
+  background-color: #e7ffe9e5;
+}
+
+.btnPopUp {
+  /*padding: 10px 40px;*/
+  /*margin: 10px 0px;*/
+  background-color: #10ab6a;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 17px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  display: inline;
+  padding: 0.45%;
 }
