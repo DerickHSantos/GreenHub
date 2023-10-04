@@ -8,17 +8,18 @@ Digite 'npm install axios crypto express express-session mysql';
 Abra o XAMPP e dê start nos servidores apache e mysql;
 Abra o Workbench e crie uma conexão com o nome TechGreen;
 Abra a conexão e cole os seguintes comandos:
-Ou vá no arquivo db.txt e copie e cole todos os códigos
+Ou abra os arquivos db.sql ou db.txt e copie e cole todos os códigos
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE DATABASE GreenHub;
-USE Greenhub;
+USE GreenHub;
 
 CREATE TABLE feedbacks (idFeedbacks INT AUTO_INCREMENT PRIMARY KEY, emailFeedbacks VARCHAR(255), notaFeedbacks INTEGER, comentarioFeedbacks VARCHAR(255));
-CREATE TABLE usuarios (idUsuarios INT AUTO_INCREMENT PRIMARY KEY, nomeUsuarios VARCHAR(255), emailUsuarios VARCHAR(255), cepUsuarios INTEGER(8), senhaUsuarios VARCHAR(255), isAdmin BOOL);
+CREATE TABLE usuarios (idUsuarios INT AUTO_INCREMENT PRIMARY KEY, nomeUsuarios VARCHAR(255), emailUsuarios VARCHAR(255), cepUsuarios INTEGER(8), senhaUsuarios VARCHAR(255), querReciclar BOOL DEFAULT false, isAdmin BOOL);
 CREATE TABLE pontosColeta (idPontosColeta INT AUTO_INCREMENT PRIMARY KEY, nomePontosColeta VARCHAR(255), cepPontosColeta INTEGER(8));
 
-INSERT INTO usuarios (nomeUsuarios, emailUsuarios, cepUsuarios, senhaUsuarios, isAdmin) VALUES ("Admin", "admin@admin.com", "", "0a6afbeab59a682a0cb0e9187d1cdaca", true);
+INSERT INTO usuarios (nomeUsuarios, emailUsuarios, cepUsuarios, senhaUsuarios, isAdmin) 
+VALUES ("Admin", "admin@admin.com", "33902570", "0a6afbeab59a682a0cb0e9187d1cdaca", true);
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
 Dê CTRL + ENTER após cada ';';

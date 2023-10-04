@@ -1,35 +1,86 @@
+function validarNumero(input) {
+  // Remove caracteres não numéricos usando expressão regular
+  input.value = input.value.replace(/[^0-9]/g, '');
+}
+
+//Código do menu
+
 const menuButton = document.querySelector('.menu-button');
 const menuList = document.querySelector('.menu-list');
+const imgFundo = document.querySelector('.containerImagemFundo1');
+
 menuButton.addEventListener('click', function() {
   menuList.classList.toggle('open'); 
 });
 
 //Função de logout
 function logout() {
-  fetch('/logout', {
-    method: 'GET',
-    credentials: 'same-origin'
-  })
-  .then(response => {
-    if (response.ok) {
-      //Redireciona o usuário para a página inicial
-      window.location.href = '/index.html'; 
-    } else {
-      //Se erro
-      console.error('Erro ao fazer logout:', response);
-    }
-  })
-  .catch(error => {
-    console.error('Erro ao fazer logout:', error);
-  });
+fetch('/logout', {
+  method: 'GET',
+  credentials: 'same-origin'
+})
+.then(response => {
+  if (response.ok) {
+    //Redireciona o usuário para a página inicial
+    window.location.href = '/index.html'; 
+  } else {
+    //Se erro
+    console.error('Erro ao fazer logout:', response);
+  }
+})
+.catch(error => {
+  console.error('Erro ao fazer logout:', error);
+});
 }
 
-//Menu
-//Inicialização do menu dropdown
-$('.ui.dropdown').dropdown();
+let popUpAberto = null; // Armazena o ID do pop-up atualmente aberto
 
-//Inicialização da barra de pesquisa
-$('.ui.search').search();
+function abrirPopUp(botao) {
+    // Fechar o pop-up atual antes de abrir um novo
+    if (popUpAberto) {
+        fecharPopUp(popUpAberto);
+    }
+
+    let popUpId = "popUp" + botao.id;
+    let popUp = document.getElementById(popUpId);
+    popUp.style.display = "grid";
+    popUp.style.opacity = 1;
+    popUpAberto = popUpId; // Atualiza o pop-up atualmente aberto
+
+    // Agendar fechamento do pop-up após 3 segundos
+    setTimeout(function () {
+        fecharPopUp(popUpAberto);
+    }, 3000);
+}
+
+function fecharPopUp(popUpId) {
+    let popUp = document.getElementById(popUpId);
+    popUp.style.display = "none";
+    popUpAberto = null; // Nenhum pop-up aberto após fechar
+}
+  
+  var idUsuario = "";
+  //Declarar a variável do mapa globalmente
+  var map; 
+  //Após o login bem-sucedido
+  axios.get('/usuario')
+  .then(response => {
+    
+    document.getElementById("logout").style.display = "flex";
+    // Pegar o cep do usuário
+    const usuario = response.data;
+    const cepUsuario = usuario.cepUsuarios;
+    const nomeUsuario = usuario.nomeUsuarios;
+
+    idUsuario = usuario.idUsuarios;
+    document.getElementById("bemVindo").textContent = ("Seja bem-vind@ " + nomeUsuario + "!");
+    document.getElementById("links").style.display = "none";
+
+  })
+  .catch(error => {
+    console.error('Erro ao obter informações do usuário:', error);
+  });
+
 
 //Enviar novos pontos de coleta para o banco de dados
 document.getElementById("adicionarMarcadorForm").addEventListener("submit", function(event){

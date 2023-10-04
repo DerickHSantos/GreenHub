@@ -364,6 +364,25 @@ const verificaAutenticacaoAdmin = (req, res, next) => {
   }
 };
 
+//Rota de enviar novos Agendamentos
+app.post('/enviarAgendamento', (req, res) => {
+  const { dataAgendamento, horarioAgendamento, idUsuario } = req.body;
+
+  const sql = 'INSERT INTO agendamento (dataAgendamento, horarioAgendamento, idUsuario) VALUES (?, ?, ?)';
+  const values = [dataAgendamento, horarioAgendamento, idUsuario];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao inserir dados no banco de dados:', err);
+      res.status(500).json({ error: 'Erro ao enviar dados de pc' });
+      return;
+    }
+
+    console.log('Dados de agendamento inseridos no banco de dados');
+    res.status(200).json({ message: 'Dados de agendamento enviados com sucesso' });
+  });
+});
+
 
 //Rota de enviar novos Pontos de Coleta apenas para Admins
 app.post('/enviar-coleta', verificaAutenticacaoAdmin, (req, res) => {
@@ -391,9 +410,24 @@ app.get('/usuario', verificaAutenticacao, (req, res) => {
   res.json(usuario);
 });
 
-//Rota para obter os pontos de coleta
-app.get('/pontos-coleta', (req, res) => {
-  const sql = 'SELECT * FROM pontosColeta';
+//Rota para obter os pontos de coleta da visão do usuário convencional
+app.get('/pontosColeta', (req, res) => {
+  const sql = 'SELECT cepPontosColeta, nomePontosColeta FROM pontosColeta;';
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Erro ao consultar usuários que querem reciclar:', err);
+      res.status(500).json({ error: 'Erro ao consultar usuários que querem reciclar' });
+      return;
+    }
+
+    res.status(200).json(results);
+  });
+});
+
+//Rota para obter os pontos de coleta da visão dos Centros de Reciclagem
+app.get('/pontosColetaCentroReciclagem', (req, res) => {
+  const sql = 'SELECT cepUsuarios FROM usuarios WHERE querReciclar = true; ';
 
   db.query(sql, (err, results) => {
     if (err) {
@@ -521,6 +555,30 @@ app.get('/feedbacks', verificaAutenticacaoAdmin, (req, res) => {
   });
 });
 
+//Rota de 'ping' que uma pessoa quer reciclar
+app.post('/querReciclar', (req, res) => {
+  const { idUsuario } = req.body;
+  const sql = 'UPDATE usuarios SET querReciclar = true WHERE idUsuarios = ?';
+  const values = [idUsuario];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao mandar requisição "querReciclar":', err);
+      res.status(500).json({ error: 'Erro ao mandar requisição "querReciclar"' });
+      return;
+    }
+
+    if (result.affectedRows === 0) {
+      console.log('Nenhuma "querReciclar" foi alterada no banco de dados');
+      res.status(400).json({ error: 'Falha ao alterar "querReciclar". Verifique as credenciais fornecidas.' });
+      return;
+    }
+
+    console.log('"querReciclar" foi alterada no banco de dados');
+    res.status(200).json({ message: '"querReciclar" foi alterada no banco de dados' });
+  });
+});
+
 const passwordSecret = generatePasswordSecret();
 //Função para criptografar a senha
 const encryptPassword = (password) => {
@@ -542,7 +600,5 @@ app.get('/logout', (req, res) => {
     res.status(200).json({ message: 'Logout realizado com sucesso' });
   });
 });
-
-
 
 //Propriedade de ©TechGrenn, Todos os direitos reservados, 2023

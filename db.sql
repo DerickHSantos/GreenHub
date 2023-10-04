@@ -1,5 +1,5 @@
 CREATE DATABASE GreenHub;
-DROP DATABASE GreenHub;
+/*DROP DATABASE GreenHub;*/
 USE GreenHub;
 
 CREATE TABLE feedbacks (idFeedbacks INT AUTO_INCREMENT PRIMARY KEY, emailFeedbacks VARCHAR(255), notaFeedbacks INTEGER, comentarioFeedbacks VARCHAR(255));
@@ -60,4 +60,4 @@ SELECT * FROM pontosColeta;
 
 SELECT cepUsuarios FROM usuarios WHERE querReciclar = true; 
 
-DROP TABLE pontosColeta;
+/*DROP TABLE pontosColeta;*/

@@ -620,7 +620,7 @@
     text-align: center;
   }
 
-  .btnCadastre {
+  /*.btnCadastre {
 
     padding: 10px 20px;
     color: #10ab6a;
@@ -641,7 +641,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-  }
+  }*/
 
   /* Estilos para telas menores que 768px */
   @media screen and (max-width: 768px) {
@@ -671,13 +671,13 @@
       width: 80px;
     }
 
-    .btnCadastre,
+    /*.btnCadastre,
     .btnLogin {
       padding: 5px 10px;
       margin: 10 0px;
       text-align: center;
       align-items: center;
-    }
+    }*/
 
     .links ul {
       margin: 0;
@@ -706,7 +706,7 @@
   
   .menu-list.open {
     height: fit-content; /* Defina o valor apropriado para a altura do menu */
-    padding: -1%;
+    padding: 0% 1%;
   }
   
   .menu-list li {
@@ -951,4 +951,122 @@
   cursor: pointer;
   display: inline;
   padding: 0.45%;
+}
+
+#calendar{
+  max-width: 20%;
+}
+
+.vanilla-calendar {
+  border: #00AA95 1.55px solid;
+  margin-left: 4%;
+  width: 16.666%;
+}
+
+#horaAgendamento {
+  width: 20%;
+  padding: 2%;
+  margin: 2%;
+  margin-right: 2%;
+  margin-right: 0%;
+  border: 3px solid #114741;
+  border-radius: 100px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #3d3d3d;
+}
+
+.cadastro-right{
+  padding: 1.666%;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-radius: 20px;
+  
+}
+
+.cadastro-right p{
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  margin: 35px;
+  color:#fff;    
+}
+
+.cadastro-right h3{
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  margin: 15px;
+  color:#fff;    
+}
+
+.cadastro-right input[type="submit"] {
+  width: 16.666%;
+  padding: 1.666%;
+  padding-left: 1.333%;
+  margin: 2%;
+  border: 3px solid #114741;
+  border-radius: 100px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #3d3d3d;
+}
+
+@media screen and (max-width: 768px) {
+  .right {
+    width: 100%;
+  }
+  
+  .cadastro-right{
+      margin-left: 0%;
+      margin-right: 0%;
+  }
+  .left{
+      all:unset;
+  }
+
+  .left img{
+  display: none;
+  }
+}
+
+.mapao{
+  width: 150px;
+  height: auto;
+  margin: 15px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.informarCep{
+  background-color: #13524a;
+  padding: 5px;
+  width:90%;
+  height: auto;
+  margin: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  
+}
+
+.informarCep p{
+  margin: 3%;
+  font-weight: 600;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  align-items: center;
+  font-family: 'Nunito';
 }

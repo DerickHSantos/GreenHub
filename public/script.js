@@ -52,44 +52,7 @@ axios.get('/usuario')
         console.log('Avaliação selecionada: ' + selectedRating);
       });
     }
-
-  //Código do feedback
-
-
-  btnFeedback.addEventListener('click', function (event) {
-    event.preventDefault();
-
-    let email = document.getElementById('emailFeedback').value;
-    let comentario = document.getElementById('textoFeedback').value;
-    let nota = selectedRating;
-    if (email != "" && nota != "" && typeof nota !== 'undefined'){
-              //Continua com o envio do cadastro
-              console.log(email, nota, comentario)
-              fetch("/enviar-feedback", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email, nota, comentario })
-              })
-              .then(response => response.json())
-              .then(data => {
-                window.alert("Feedback enviado com sucesso!");
-                document.getElementById("feedbackForm").reset();
-                selectedRating = "";
-              })
-              .catch(error => {
-                console.error("Erro ao adicionar cadastro.", error);
-                window.alert("Erro ao enviar cadastro, por favor tente novamente.");
-                document.getElementById("feedbackForm").reset();
-              });
-              
-            }
-            else
-            alert("Você precisa informar seu email e dar uma nota!")
-
-          })
-        
+       
 
   //Código do menu
 
@@ -157,5 +120,40 @@ function temaEscuro(){
   localStorage.setItem("temaClaroLocal", "false");
   document.getElementById("temaBotao").textContent = "Tema Claro";
 }
+
+  //Código do feedback
+  btnFeedback.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    let email = document.getElementById('emailFeedback').value;
+    let comentario = document.getElementById('textoFeedback').value;
+    let nota = selectedRating;
+    if (email != "" && nota != "" && typeof nota !== 'undefined'){
+      //Continua com o envio do cadastro
+      console.log(email, nota, comentario)
+      fetch("/enviar-feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, nota, comentario })
+      })
+      .then(response => response.json())
+      .then(data => {
+        window.alert("Feedback enviado com sucesso!");
+        document.getElementById("feedbackForm").reset();
+        selectedRating = "";
+      })
+      .catch(error => {
+        console.error("Erro ao adicionar cadastro.", error);
+        window.alert("Erro ao enviar cadastro, por favor tente novamente.");
+        document.getElementById("feedbackForm").reset();
+      });
+      
+    }
+    else
+    alert("Você precisa informar seu email e dar uma nota!")
+
+  })
 
 //Propriedade de ©TechGrenn, Todos os direitos reservados, 2023

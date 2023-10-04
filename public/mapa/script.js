@@ -1,25 +1,100 @@
-  //Código do menu
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Código das estrelas 
+  const ratingStars = document.getElementsByName('rating');
+  let selectedRating;
+
+  for (let i = 0; i < ratingStars.length; i++) {
+    ratingStars[i].addEventListener('click', function () {
+      selectedRating = this.value;
+      console.log('Avaliação selecionada: ' + selectedRating);
+    });
+  }
+
+//Código do menu
+
 const menuButton = document.querySelector('.menu-button');
 const menuList = document.querySelector('.menu-list');
+const imgFundo = document.querySelector('.containerImagemFundo1');
+
 menuButton.addEventListener('click', function() {
   menuList.classList.toggle('open'); 
-}); 
+});
+});
+
+//Função de logout
+function logout() {
+fetch('/logout', {
+  method: 'GET',
+  credentials: 'same-origin'
+})
+.then(response => {
+  if (response.ok) {
+    //Redireciona o usuário para a página inicial
+    window.location.href = '/index.html'; 
+  } else {
+    //Se erro
+    console.error('Erro ao fazer logout:', response);
+  }
+})
+.catch(error => {
+  console.error('Erro ao fazer logout:', error);
+});
+}
+
+let popUpAberto = null; // Armazena o ID do pop-up atualmente aberto
+
+function abrirPopUp(botao) {
+    // Fechar o pop-up atual antes de abrir um novo
+    if (popUpAberto) {
+        fecharPopUp(popUpAberto);
+    }
+
+    let popUpId = "popUp" + botao.id;
+    let popUp = document.getElementById(popUpId);
+    popUp.style.display = "grid";
+    popUp.style.opacity = 1;
+    popUpAberto = popUpId; // Atualiza o pop-up atualmente aberto
+
+    // Agendar fechamento do pop-up após 3 segundos
+    setTimeout(function () {
+        fecharPopUp(popUpAberto);
+    }, 3000);
+}
+
+function fecharPopUp(popUpId) {
+    let popUp = document.getElementById(popUpId);
+    popUp.style.display = "none";
+    popUpAberto = null; // Nenhum pop-up aberto após fechar
+}
   
+  var idUsuario = "";
   //Declarar a variável do mapa globalmente
   var map; 
   //Após o login bem-sucedido
   axios.get('/usuario')
   .then(response => {
+    
+    document.getElementById("logout").style.display = "flex";
     // Pegar o cep do usuário
     const usuario = response.data;
     const cepUsuario = usuario.cepUsuarios;
-    console.log("1")
+    const nomeUsuario = usuario.nomeUsuarios;
+
+    const isAdmin = usuario.isAdmin;
+
+    if (isAdmin === 1)
+    document.getElementById("admin").style.display= "flex";
+
+    idUsuario = usuario.idUsuarios;
+    document.getElementById("bemVindo").textContent = ("Seja bem-vind@ " + nomeUsuario + "!");
+    document.getElementById("links").style.display = "none";
 
     //inicia o mapa
     initMap(cepUsuario); 
 
     // Pegar os pontos de coleta
-    axios.get('/pontos-coleta')
+    axios.get('/pontosColeta')
       .then(response => {
         const pontosColeta = response.data;
         //console.log(pontosColeta);
@@ -33,6 +108,35 @@ menuButton.addEventListener('click', function() {
   .catch(error => {
     console.error('Erro ao obter informações do usuário:', error);
   });
+
+  //Enviar um 'ping' para o db que o usuário quer descartar
+document.getElementById("querReciclarForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  console.log(idUsuario);
+
+  //Enviar requisição POST ppelo Node.js
+  fetch("/querReciclar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    //Converter
+    body: JSON.stringify({ idUsuario })
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Solicitação inválida");
+      }
+      return response.json();
+    })
+    .then(data => {
+      alert("Chamado de Reciclagem realizado com sucesso!")
+    })
+    .catch(error => {
+      window.alert("Erro ao realizar Chamado de Reciclagem. Por favor, tente novamente.");
+    });
+});
   
 //Exibir os pontos de coleta do db no mapa
 // Função para adicionar os marcadores do banco de dados ao array 'markers'
@@ -50,14 +154,14 @@ function addPontosColetaAoMapa(pontosColeta) {
 
         markers.push({
           position: position,
-          title: ponto.nome
+          title: ponto.nomePontosColeta
         });
 
         // Crie o marcador no mapa para cada ponto de coleta
         new google.maps.Marker({
           position: position,
           map: map,
-          title: ponto.nome
+          title: ponto.nomePontosColeta
         });
       })
       .catch(error => {
@@ -70,7 +174,7 @@ function addPontosColetaAoMapa(pontosColeta) {
     let markers = [
     {
       position: { lat: -19.918698522039413, lng: -43.93798276189918 },
-      title: 'Sede TechGreen'
+      title: 'Sede GreenHub'
     },
 ];
     
@@ -176,13 +280,6 @@ function addPontosColetaAoMapa(pontosColeta) {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 12,
           center: myLatLng
-        });
-  
-        //Criar marcador para o usuário
-        new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: "Seu endereço"
         });
   
         //Mostrar os pontos no mapa
