@@ -292,34 +292,39 @@ function addPontosColetaAoMapa(pontosColeta) {
         });
   
         //Executar ao confirmar formulário
+        // Executar ao confirmar formulário
         document.getElementById('cepForm').addEventListener('submit', function(event) {
           event.preventDefault();
-          //Pegar o CEP do html
+          // Pegar o CEP do html
           const cep = document.getElementById('cepInput').value;
-  
-          //Pegar as coordenadas pelo CEP
+
+          // Pegar as coordenadas pelo CEP
           getCoordinatesFromCEP(cep)
             .then(userCoordinates => {
-              //Clonar o array de marcadores
+              // Clonar o array de marcadores
               let markersCopy = [...markers];
-              //Remover o marcador do usuário do array da array para não atrapalhar nos cálculos de distância
-              markersCopy.pop();
-  
-              //Calcular o ponto mais perto
+
+              // Encontrar e remover o marcador da casa do array
+              const homeMarkerIndex = markersCopy.findIndex(marker => marker.title === "Seu endereço");
+              if (homeMarkerIndex !== -1) {
+                markersCopy.splice(homeMarkerIndex, 1);
+              }
+
+              // Calcular o ponto mais perto
               let nearestPoint = null;
               let nearestDistance = Infinity;
-  
+
               markersCopy.forEach(function(marker) {
-                //Pegar a distância
+                // Pegar a distância
                 const distance = calculateDistance(userCoordinates.latitude, userCoordinates.longitude, marker.position.lat, marker.position.lng);
-                //Calcular o ponto mais perto
+                // Calcular o ponto mais perto
                 if (distance < nearestDistance) {
                   nearestDistance = distance;
                   nearestPoint = marker.position;
                 }
               });
-  
-              //Mostrar a rota para o ponto mais perto
+
+              // Mostrar a rota para o ponto mais perto
               const distanceResultElement = document.getElementById('distanceResult');
               if (nearestPoint) {
                 distanceResultElement.innerHTML = `Distância para o ponto mais próximo: ${nearestDistance.toFixed(2)} km<br>`;
@@ -329,6 +334,7 @@ function addPontosColetaAoMapa(pontosColeta) {
               }
             });
         });
+
   
         geocoder = new google.maps.Geocoder();
       })
@@ -338,17 +344,22 @@ function addPontosColetaAoMapa(pontosColeta) {
   }
 
   //Função para criar um marcador na localização que usuário inseriu ao se cadastrar
+  // Função para criar um marcador na localização que o usuário inseriu ao se cadastrar
   function markerHome(latitude, longitude, cep) {
-    var markerHome = {
-      position: {
-        lat: latitude,
-        lng: longitude
-      },
-      title: "Seu endereço"
-    };
-    markers.push(markerHome);
+    const existingHomeMarker = markers.find(marker => marker.title === "Seu endereço");
+    if (!existingHomeMarker) {
+      const newHomeMarker = {
+        position: {
+          lat: latitude,
+          lng: longitude
+        },
+        title: "Seu endereço"
+      };
+      markers.push(newHomeMarker);
+    }
     document.getElementById("cepInput").value = cep;
   }
+
   //Função criar um novo marcador no mapa
   function newMarker() {
   //Pega os dados do html
@@ -470,4 +481,4 @@ function temaEscuro(){
 }
 
 
-//Propriedade de ©TechGrenn, Todos os direitos reservados, 2023
+//Propriedade de ©GreenHub, Todos os direitos reservados, 2023

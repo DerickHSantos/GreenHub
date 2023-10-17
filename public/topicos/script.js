@@ -105,3 +105,5 @@ function temaEscuro(){
   localStorage.setItem("temaClaroLocal", "false");
   document.getElementById("temaBotao").textContent = "Tema Claro";
 }
+
+//Propriedade de ©GreenHub, Todos os direitos reservados, 2023

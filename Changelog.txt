@@ -44,3 +44,7 @@ Falta estilizar as mudanças feitas
 Falta testar todas as funcionalidades após todas as mudanças
 
 Obs: Pasta feedback provavelmente pode ser removida, não acho que está sendo usada 
+
+v0.5
+Corrigido novamente bug no mapa que calculava a rota para a própria casa
+Corrigido bug do calendário no agendamento não mostrar a data após selecionada

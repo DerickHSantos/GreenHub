@@ -156,4 +156,4 @@ function temaEscuro(){
 
   })
 
-//Propriedade de ©TechGrenn, Todos os direitos reservados, 2023
+//Propriedade de ©GreenHub, Todos os direitos reservados, 2023

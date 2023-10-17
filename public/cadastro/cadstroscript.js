@@ -298,5 +298,6 @@ function temaEscuro(){
   document.body.style.backgroundColor = "#161616";
   document.body.style.color = "aliceblue";
   localStorage.setItem("temaClaroLocal", "false");
-
 }
+
+//Propriedade de ©GreenHub, Todos os direitos reservados, 2023

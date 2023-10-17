@@ -157,3 +157,5 @@ function temaEscuro(){
   localStorage.setItem("temaClaroLocal", "false");
 
 }
+
+//Propriedade de ©GreenHub, Todos os direitos reservados, 2023

@@ -42,7 +42,7 @@ axios.get('/usuario')
   });
 
     //Configurações do calendário
-    const options = {
+    /*const options = {
         input: true,
         actions: {
             changeToInput(e, HTMLInputElement, dates, time, hours, minutes, keeping) {
@@ -64,38 +64,62 @@ axios.get('/usuario')
 
     //Iniciar o calendário
     const calendar = new VanillaCalendar('#dataAgendamento', options);
-    calendar.init();
+    calendar.init();*/
+
+    const options = {
+      input: true,
+      actions: {
+        changeToInput(e, calendar, dates, time, hours, minutes, keeping) {
+          if (dates[0]) {
+            calendar.HTMLInputElement.value = dates[0];
+            // if you want to hide the calendar after picking a date
+            calendar.hide();
+          } else {
+            calendar.HTMLInputElement.value = "";
+          }
+        }
+      }
+    };
+    
+    const calendarInput = new VanillaCalendar("#dataAgendamento", options);
+    calendarInput.init();
+    
 
     document.getElementById("enviarAgendamentoForm").addEventListener("submit", function(event) {
         event.preventDefault();
       
-        let idUsuario = usuario.idUsuarios
-        let dataAgendamento = document.getElementById("dataAgendamento").value;
-        let horarioAgendamento = document.getElementById("horarioAgendamento").value;
-      
-        //Mandar para o db por rota post pelo nodejs
-        fetch("/enviarAgendamento", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          //Converter
-          body: JSON.stringify({ dataAgendamento, horarioAgendamento, idUsuario })
-        })
+        axios.get('/usuario')
           .then(response => {
-            if (!response.ok) {
-              throw new Error("Credenciais inválidas");
-            }
-            return response.json();
+            const usuario = response.data;
+
+            let idUsuario = usuario.idUsuarios
+            let dataAgendamento = document.getElementById("dataAgendamento").value;
+            let horarioAgendamento = document.getElementById("horarioAgendamento").value;
+          
+            //Mandar para o db por rota post pelo nodejs
+            fetch("/enviarAgendamento", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              //Converter
+              body: JSON.stringify({ dataAgendamento, horarioAgendamento, idUsuario })
+            })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error("Credenciais inválidas");
+                }
+                return response.json();
+              })
+              .then(data => {
+                alert("Agendamento realizado com sucesso!")
+                //Volta para página inicial
+                location.reload(); 
+              })
+              .catch(error => {
+                window.alert("Erro ao realizar agendamento. Por favor, tente novamente.");
+              });
           })
-          .then(data => {
-            alert("Agendamento realizado com sucesso!")
-            //Volta para página inicial
-            location.reload(); 
-          })
-          .catch(error => {
-            window.alert("Erro ao realizar agendamento. Por favor, tente novamente.");
-          });
       });
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -216,4 +240,4 @@ function temaEscuro(){
   document.getElementById("temaBotao").textContent = "Tema Claro";
 }
 
-//Propriedade de ©TechGrenn, Todos os direitos reservados, 2023
+//Propriedade de ©GreenHub, Todos os direitos reservados, 2023
