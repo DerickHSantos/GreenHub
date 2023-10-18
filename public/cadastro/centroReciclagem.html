@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro GreenHub</title>
+    <link rel="icon" href="/images/favicon_Greenhub.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body onload="verificarTema()">
+    <div class="container">
+        <div class="left">
+            <img src="/images/menino.png">
+        </div>
+        <div class="right">
+            <form class="cadastro-right" action="/cadastroPessoaFisica" id="cadastroPessoaFisicaForm">
+                <a href="/index.html"><img src="/images/logo.png" class="logo"></a>
+                <p class="custom-underline">Crie uma conta</p>
+                <input type="text" placeholder="Nome Completo" id="nomeCadastro" required>
+                <input type="text" placeholder="CNPJ (Apenas Números)" id="cnpjCadastro" oninput="validarNumero(this)" maxlength="18" minlength="18" required>
+                <input type="password" placeholder="Senha" id="senhaCadastro" required>
+                <input type="text" placeholder="CEP"  id="cepCadastro" required>
+                <h3>Já tem uma conta ? <span class="span"><a href="/login/pessoaFisica.html" class="link">Faça login</span></h3></a>
+                <h3>Ao clicar em Cadastar, você concorda com nossas <span class="span"><a href="/politicatermo/politicatermo.html">Políticas e Termos de Serviço</a></span></h3>
+                <button type="submit" class="button-enter">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="cadstroscript.js"></script>
+</html>

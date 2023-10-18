@@ -1,0 +1,50 @@
+v0.1
+Começo da base do projeto
+Imagens movidas para a pasta "images"
+
+v0.2
+Separação entre login e cadastro de Pessoa Física, Empresa e Centro de Recilagem
+Falta criar as tabelas no db
+Criar rota de verificar cnpj
+Criar funções ou rotas de cadastro nas tabelas de Empresa e Centro de Recilagem
+
+Esqueceu a senha para empresas e centros
+Falta combinar arquivos css duplicados
+
+v0.2.1
+Mudado nome de usuario login
+Correção de bug no mapa
+Adicionado nome de usuário an barra de menu
+
+v0.3 
+Adicionado popup para fazer login ou cadastro
+Supostamente as rotas de cadastro dos 4 tipos de usuarios estão funcionando
+Adicionadas páginas de cadastro para industria, empresa e centro de reciclagem
+Falta - Adicionar todas as anterirores no banco de dados
+
+v0.3.1
+Supostamente as rotas de login dos 4 tipos de usuarios estão funcionando
+Adicionadas páginas de login para industria, empresa e centro de reciclagem
+Supostamente as rotas de esqueceu a senha dos 4 tipos de usuarios estão funcionando
+Adicionadas páginas de esqueceu a senha para industria, empresa e centro de reciclagem
+
+v0.4
+Adicionada página de agendamento supostamente funcionando
+Adicionadas várias rotas post pelo nodejs em server.js
+Adicioanda página de mapa da visão dos Centros de Reciclagem, onde eles podem ver endereços que houveram solicitação de reciclagem
+Equalizados o menu superior e rodapé de todas as páginas
+Corrigido bug no mapa que calculava a rota para a própria casa
+Adicionada funcionalidade "Quero reciclar" pra mostrar os endereços no mapa dos Centros de Reciclagem
+Adicionada função de sessão e logout para diversas páginas
+Adicionado Popups de login e cadastro no menu superior
+Adicionado opção na página de mapa para acessar a página Admin se o usuário for admin
+
+Falta fazer atualizações no banco de dados para o novo modelo de negócios (novos usuários e tabela agendamento)
+Falta estilizar as mudanças feitas
+Falta testar todas as funcionalidades após todas as mudanças
+
+Obs: Pasta feedback provavelmente pode ser removida, não acho que está sendo usada 
+
+v0.5
+Corrigido novamente bug no mapa que calculava a rota para a própria casa
+Corrigido bug do calendário no agendamento não mostrar a data após selecionada

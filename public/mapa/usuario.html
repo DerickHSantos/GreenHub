@@ -1,0 +1,142 @@
+  <!DOCTYPE html>
+  <html lang="pt-br">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>GreenHub</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="/style.css">
+      <link rel="icon" href="/images/favicon_Greenhub.png">
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  </head>
+  <body onload="verificarTema()">
+  
+  <!-- Menu Superior -->
+  <div class="container">
+    <div class="item">
+      <header>
+          <div class="logo">
+            <a href="/index.html"><img src="/images/logo.png" alt="Logo da Greenhub"></a>
+          </div>
+          <img src="/images/menuGreenHub.png" alt="Menu" class="menu-button">
+        </div>
+      </header>
+    </div>
+  </div>
+
+    <div class="menu-list">
+      <div id="bemVindo">Você não está logado, por favor realize o login</div>
+      <div id="links">
+        <div class="links2">
+          <p>Quem é você?</p>
+          <hr class="hrTransparent">
+          <ul id="links2">
+            <hr class="hrTransparent">
+            <li>
+              <a class="btnLogin2" id="PessoaFisica" onmouseenter="abrirPopUp(this)">Pessoa Física</a>
+              <a class="btnCadastre2" id="Empresa" onmouseenter="abrirPopUp(this)">Empresa</a>
+              <a class="btnLogin2" id="Industria" onmouseenter="abrirPopUp(this)">Indústria </a>
+              <a class="btnCadastre2" id="CentroReciclagem" onmouseenter="abrirPopUp(this)">Centro de Reciclagem</a>
+            </li>
+          </ul>
+
+          </div>
+          
+      </div>
+      <div id="popUpPessoaFisica" style="display: none;"><span class="popUp"><a href="/login/pessoaFisica.html" class="btnPopUp">Login</a>&nbsp&nbsp&nbsp<a href="/cadastro/pessoaFisica.html" class="btnPopUp">Cadastro</a></span></div>
+      <div id="popUpEmpresa" style="display: none;"><span class="popUp"><a href="/login/empresa.html" class="btnPopUp">Login</a>&nbsp&nbsp&nbsp<a href="/cadastro/empresa.html" class="btnPopUp">Cadastro</a></span></div>
+      <div id="popUpIndustria" style="display: none;"><span class="popUp"><a href="/login/industria.html" class="btnPopUp">Login</a>&nbsp&nbsp&nbsp<a href="/cadastro/industria.html" class="btnPopUp">Cadastro</a></span></div>
+      <div id="popUpCentroReciclagem" style="display: none;"><span class="popUp"><a href="/login/centroReciclagem.html" class="btnPopUp">Login</a>&nbsp&nbsp&nbsp<a href="/cadastro/centroReciclagem.html" class="btnPopUp">Cadastro</a></span></div>
+        <a id="logout" class="btnLogout2" onclick="logout()">Logout</a>
+        <a style="display: none;" id="admin" class="btnLogout2" href="/admin/admin.html">Admin</a>
+
+        <div class="links2">
+          <ul>
+            <li><a id="temaBotao" onclick="trocarTema()" style="cursor: pointer;">Tema Escuro</a></li>
+            <li><a href="/sobre/sobre.html">Sobre Nós</a></li>
+            <li><a href="/topicos/topicos.html">Tópicos</a></li>
+          </ul>
+        </div>
+        <div class="social-media2">
+          <ul>
+            <li><a href="#"><i class="fab fa-facebook-f"><img src="/images/facebook.png"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"><img src="/images/twitter.png"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"><img src="/images/instagram.png"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin"><img src="/images/gmail.png"></i></a></li>
+          </ul>
+        </div>
+
+        <div class="legal2">
+          <p>&copy; 2023 GreenHub. Todos os direitos reservados.</p>
+          <p><a href="/politicatermo/politicatermo.html">Política de Privacidade</a> | <a href="/politicatermo/politicatermo.html">Termos e Condições</a></p>
+        </div>
+    </div>
+       <div class="item">
+        <img class="imagemFundo1" id="avenidaCelular">
+      </div>
+    </div>
+  <!--Fim do menu superior-->
+  
+    <!--Entrada de dados-->
+    <form id="cepForm">
+        <div class="informarCep">
+          <img class="mapao" src="mapao.png">
+          <p>Informe seu CEP e veja os pontos de coleta mais próximos de você !</p>
+          <hr>
+          <input type="text" id="cepInput" placeholder="00000-000" class="ui medium big input">
+          <button type="submit" class="ui-mini-green-button">Calcular distância</button>
+        
+    </form>
+    <form id="querReciclarForm" action="/querReciclar" method="post">
+      <input type="submit" class="ui-mini-green-button" value="Quero Reciclar">
+    </form>
+        </div>
+  
+    <!--Div do mapa-->
+    <div id="map">Para visualizar o mapa, é necessário<a href="/login/pessoaFisica.html">&nbsp;fazer login</a>.</div>
+    <div id="distanceResult"></div>
+  
+    <!--Pegar a API do Google Maps-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcvGFK7tDzC21apkaruZpGlMJgROyXphU&callback=initMap" async defer></script>
+  
+    <footer>
+      <div class="containerFooter">
+        <div class="logoFooter">
+          <img src="/images/logo.png" alt="Logo da sua marca">
+          </div>
+          <div class="links">
+            <ul>
+              <li><a href="/index.html">Página Inicial</a></li>
+              <li><a href="/sobre/sobre.html">Sobre Nós</a></li>
+              <li><a href="/topicos/topicos.html">Tópicos</a></li>
+            </ul>
+          </div>
+          <div class="contact">
+            <p>Em busca</p>
+            <p>de um mundo</p>
+            <p>mais gr<span class="contactVerde1">e</span><span class="contactVerde2">e</span>n.</p>
+          </div>
+          <div class="social-media">
+            <ul>
+              <li><a href="#"><i class="fab fa-facebook-f"><img src="/images/facebook.png" alt="Logo Facebook"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"><img src="/images/twitter.png" alt="Logo Twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram"><img src="/images/instagram.png" alt="Logo Instagram"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin"><img src="/images/gmail.png" alt="Logo Gmail"></i></a></li>
+            </ul>
+          </div>
+          <div class="legal">
+            <p>&copy; 2023 GreenHub. Todos os direitos reservados.</p>
+            <p><a href="/politicatermo/politicatermo.html">Política de Privacidade</a> | <a href="/politicatermo/politicatermo.html">Termos e Condições</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script src="script.js" defer></script>
+  <!--Propriedade de ©TechGrenn, Todos os direitos reservados, 2023-->
+  </html>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+</body>
+<!--Propriedade de ©TechGrenn, Todos os direitos reservados, 2023-->
+</html>
