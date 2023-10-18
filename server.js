@@ -66,7 +66,7 @@ app.post('/enviar-feedback', (req, res) => {
   //Pegar variáveis do site
   const { email, nota, comentario } = req.body;
   //Sintaxe mysql
-  const sql = 'INSERT INTO feedbacks (notaFeedbacks, comentarioFeedbacks, emailFeedbacks) VALUES (?, ?, ?)';
+  const sql = 'INSERT INTO feedback (notaFeedback, avaliacaoFeedback, emailFeedback) VALUES (?, ?, ?)';
   const values = [nota, comentario, email];
 
   //Tentar fazer o insert no db
@@ -88,7 +88,7 @@ app.post('/cadastroPessoaFisica', (req, res) => {
   //criptografar senha
   const encryptedPassword = encryptPassword(senha);
 
-  const sql = 'INSERT INTO usuarios (nomeUsuarios, emailUsuarios, cepUsuarios, senhaUsuarios) VALUES (?, ?, ?, ?)';
+  const sql = 'insert into pessoaFisica (nomePessoaFisica, emailPessoaFisica, CEPPessoaFisica, senhaPessoaFisica) values (?, ?, ?, ?)';
   const values = [nome, email, cep, encryptedPassword];
 
   db.query(sql, values, (err, result) => {
@@ -105,12 +105,12 @@ app.post('/cadastroPessoaFisica', (req, res) => {
 
 //Rota de enviar novos Cadastros Industria
 app.post('/cadastroIndustria', (req, res) => {
-  const { nome, cnpj, cep, senha } = req.body;
+  const { nome, cnpj, cep, senha, email } = req.body;
   //criptografar senha
   const encryptedPassword = encryptPassword(senha);
 
-  const sql = 'INSERT INTO industria (nomeIndustria, cnpjIndustria, cepIndustria, senhaIndustria) VALUES (?, ?, ?, ?)';
-  const values = [nome, cnpj, cep, encryptedPassword];
+  const sql = ' insert into industria (nomeIndustria, CNPJIndustria, CEPIndustria, emailIndustria, senhaIndustria,) values (?, ?, ?, ?)';
+  const values = [nome, cnpj, cep, email, encryptedPassword];
 
   db.query(sql, values, (err, result) => {
     if (err) {
@@ -126,12 +126,12 @@ app.post('/cadastroIndustria', (req, res) => {
 
 //Rota de enviar novos Cadastros Empresa
 app.post('/cadastroEmpresa', (req, res) => {
-  const { nome, cnpj, cep, senha } = req.body;
+  const { nome, cnpj, cep, senha, email } = req.body;
   //criptografar senha
   const encryptedPassword = encryptPassword(senha);
 
-  const sql = 'INSERT INTO empresa (nomeEmpresa, cnpjEmpresa, cepEmpresa, senhaEmpresa) VALUES (?, ?, ?, ?)';
-  const values = [nome, cnpj, cep, encryptedPassword];
+  const sql = 'insert into empresa (nomeEmpresa, CNPJEmpresa, CEPEmpresa, emailEmpresa, senhaEmpresa) values (?, ?, ?, ?)';
+  const values = [nome, cnpj, cep, email, encryptedPassword];
 
   db.query(sql, values, (err, result) => {
     if (err) {
@@ -147,12 +147,12 @@ app.post('/cadastroEmpresa', (req, res) => {
 
 //Rota de enviar novos Cadastros Centro de Reciclagem
 app.post('/cadastroCentroReciclagem', (req, res) => {
-  const { nome, cnpj, cep, senha } = req.body;
+  const { nome, cnpj, cep, senha, email } = req.body;
   //criptografar senha
   const encryptedPassword = encryptPassword(senha);
 
-  const sql = 'INSERT INTO centroReciclagem (nomeCentroReciclagem, cnpjCentroReciclagem, cepCentroReciclagem, senhaCentroReciclagem) VALUES (?, ?, ?, ?)';
-  const values = [nome, cnpj, cep, encryptedPassword];
+  const sql = 'insert into centrodeReciclagem (nomeCentrodeReciclagem, CNPJCentrodeReciclagem, CEPCentrodeReciclagem , emailCentrodeReciclagem, senhaCentrodeReciclagem,) VALUES (?, ?, ?, ?)';
+  const values = [nome, cnpj, cep, email, encryptedPassword];
 
   db.query(sql, values, (err, result) => {
     if (err) {
@@ -172,7 +172,7 @@ app.post('/loginPessoaFisica', (req, res) => {
   //criptografia
   const encryptedPassword = encryptPassword(senha);
 
-  const sql = 'SELECT * FROM usuarios WHERE emailUsuarios = ? AND senhaUsuarios = ?';
+  const sql = 'SELECT * FROM pessoaFisica WHERE emailPessoaFisica = ? AND senhaPessoaFisica = ?';
   const values = [email, encryptedPassword];
 
   db.query(sql, values, (err, results) => {
@@ -199,7 +199,7 @@ app.post('/loginEmpresa', (req, res) => {
   //criptografia
   const encryptedPassword = encryptPassword(senha);
 
-  const sql = 'SELECT * FROM empresas WHERE cnpjEmpresas = ? AND senhaEmpresas = ?';
+  const sql = 'SELECT * FROM empresa WHERE CNPJEmpresa = ? AND senhaEmpresa = ?';
   const values = [cnpj, encryptedPassword];
 
   db.query(sql, values, (err, results) => {
@@ -253,34 +253,7 @@ app.post('/loginCentroReciclagem', (req, res) => {
   //criptografia
   const encryptedPassword = encryptPassword(senha);
 
-  const sql = 'SELECT * FROM centroReciclagem WHERE cnpjCentroReciclagem = ? AND senhaCentroReciclagem = ?';
-  const values = [cnpj, encryptedPassword];
-
-  db.query(sql, values, (err, results) => {
-    if (err) {
-      console.error('Erro ao consultar login:', err);
-      res.status(500).json({ error: 'Erro ao consultar login' });
-      return;
-    }
-
-    if (results.length === 0) {
-      res.status(401).json({ error: 'Credenciais inválidas' });
-    } else {
-      const usuario = results[0];
-
-      //Iniciar sessão
-      req.session.usuario = usuario;
-      res.status(200).json(usuario);
-    }
-  });
-});
-
-app.post('/loginIndustria', (req, res) => {
-  const{ cnpj, senha } = req.body;
-  //criptografia
-  const encryptedPassword = encryptPassword(senha);
-
-  const sql = 'SELECT * FROM industria WHERE cnpjIndustria = ? AND senhaIndustria = ?';
+  const sql = 'SELECT * FROM centrodeReciclagem WHERE CNPJCentrodeReciclagem = ? AND senhaCentrodeReciclagem = ?';
   const values = [cnpj, encryptedPassword];
 
   db.query(sql, values, (err, results) => {
@@ -305,7 +278,7 @@ app.post('/loginIndustria', (req, res) => {
 //Rota de Verificar se email existe no db
 app.post('/verificar-email', (req, res) => {
   const { email } = req.body;
-  const sql = 'SELECT COUNT(*) AS count FROM usuarios WHERE emailUsuarios = ?';
+  const sql = 'SELECT COUNT(*) AS count FROM pessoaFisica WHERE emailPessoaFisica = ?';
   const values = [email];
 
   db.query(sql, values, (err, result) => {
@@ -366,10 +339,10 @@ const verificaAutenticacaoAdmin = (req, res, next) => {
 
 //Rota de enviar novos Agendamentos
 app.post('/enviarAgendamento', (req, res) => {
-  const { dataAgendamento, horarioAgendamento, idUsuario } = req.body;
+  const { dataAgendamento, horarioAgendamento, industria_idIndustria, centrodeReciclagem_idCentrodeReciclagem } = req.body;
 
-  const sql = 'INSERT INTO agendamento (dataAgendamento, horarioAgendamento, idUsuario) VALUES (?, ?, ?)';
-  const values = [dataAgendamento, horarioAgendamento, idUsuario];
+  const sql = 'INSERT INTO agendamento (dataAgendamento, horarioAgendamento, industria_idIndustria, centrodeReciclagem_idCentrodeReciclagem) VALUES (?, ?, ?, ?)';
+  const values = [dataAgendamento, horarioAgendamento, 1, 1];
 
   db.query(sql, values, (err, result) => {
     if (err) {
@@ -412,7 +385,7 @@ app.get('/usuario', verificaAutenticacao, (req, res) => {
 
 //Rota para obter os pontos de coleta da visão do usuário convencional
 app.get('/pontosColeta', (req, res) => {
-  const sql = 'SELECT cepPontosColeta, nomePontosColeta FROM pontosColeta;';
+  const sql = 'SELECT CEPCentrodeReciclagem, nomeCentrodeReciclagem FROM centrodeReciclagem;';
 
   db.query(sql, (err, results) => {
     if (err) {
@@ -427,7 +400,7 @@ app.get('/pontosColeta', (req, res) => {
 
 //Rota para obter os pontos de coleta da visão dos Centros de Reciclagem
 app.get('/pontosColetaCentroReciclagem', (req, res) => {
-  const sql = 'SELECT cepUsuarios FROM usuarios WHERE querReciclar = true; ';
+  const sql = 'SELECT CEPPessoaFisica FROM pessoaFisica WHERE querReciclar = true; ';
 
   db.query(sql, (err, results) => {
     if (err) {
@@ -443,7 +416,7 @@ app.get('/pontosColetaCentroReciclagem', (req, res) => {
 //Rota de redefinir senha Pessoa Fisica
 app.post('/redefinirPessoaFisca', (req, res) => {
   const { email, senha, cep } = req.body;
-  const sql = 'UPDATE usuarios SET senhaUsuarios = ? WHERE emailUsuarios = ? AND cepUsuarios = ?';
+  const sql = 'UPDATE pessoaFisica SET senhaPessoaFisica = ? WHERE emailPessoaFisica = ? AND CEPPessoaFisica = ?';
   const encryptedPassword = encryptPassword(senha);
   const values = [encryptedPassword, email, cep];
 
@@ -518,7 +491,7 @@ app.post('/redefinirIndustria', (req, res) => {
 //Rota de redefinir senha Centro Reciclagem
 app.post('/redefinirCentroReciclagem', (req, res) => {
   const { cnpj, senha, cep } = req.body;
-  const sql = 'UPDATE centroReciclagem SET senhaCentroReciclagem = ? WHERE cnpjCentroReciclagem = ? AND cepCentroReciclagem = ?';
+  const sql = 'UPDATE centrodeReciclagem SET senhaCentrodeReciclagem = ? WHERE CNPJCentrodeReciclagem = ? AND CEPCentrodeReciclagem = ?';
   const encryptedPassword = encryptPassword(senha);
   const values = [encryptedPassword, cnpj, cep];
 
@@ -558,7 +531,7 @@ app.get('/feedbacks', verificaAutenticacaoAdmin, (req, res) => {
 //Rota de 'ping' que uma pessoa quer reciclar
 app.post('/querReciclar', (req, res) => {
   const { idUsuario } = req.body;
-  const sql = 'UPDATE usuarios SET querReciclar = true WHERE idUsuarios = ?';
+  const sql = 'UPDATE pessoaFisica SET querReciclar = true WHERE idPessoaFisica = ?';
   const values = [idUsuario];
 
   db.query(sql, values, (err, result) => {
