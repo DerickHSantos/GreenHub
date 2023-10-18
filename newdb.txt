@@ -1,0 +1,157 @@
+create database greenhub;
+use greenhub;
+
+CREATE TABLE feedback (
+  idFeedback INT NOT NULL AUTO_INCREMENT,
+  notaFeedback INT NOT NULL,
+  avaliacaoFeedback VARCHAR(500),
+  emailFeedback VARCHAR(255) NOT NULL,
+  PRIMARY KEY (idFeedback, emailFeedback));
+
+CREATE TABLE pessoaFisica (
+  idPessoaFisica INT NOT NULL AUTO_INCREMENT,
+  nomePessoaFisica VARCHAR(255) NOT NULL,
+  emailPessoaFisica VARCHAR(255) NOT NULL,
+  senhaPessoaFisica VARCHAR(45) NOT NULL,
+  CEPPessoaFisica CHAR(8) NOT NULL,
+  estadoPessoaFisica VARCHAR(100) /*NOT NULL*/,
+  cidadePessoaFisica VARCHAR(100) /*NOT NULL*/,
+  logradouroPessoaFisica VARCHAR(120) /*NOT NULL*/,
+  numeroPessoaFisica INT /*NOT NULL*/,
+  complementoPessoaFisica VARCHAR(255),
+  querReciclar BOOL DEFAULT false,
+  PRIMARY KEY (idPessoaFisica));
+  
+CREATE TABLE empresa (
+  idEmpresa INT NOT NULL AUTO_INCREMENT,
+  nomeEmpresa VARCHAR(255) NOT NULL,
+  emailEmpresa VARCHAR(255) NOT NULL,
+  senhaEmpresa VARCHAR(45) NOT NULL,
+  CNPJEmpresa CHAR(14) NOT NULL,
+  CEPEmpresa CHAR(8) NOT NULL,
+  estadoEmpresa VARCHAR(100) #NOT NULL,
+  ,cidadeEmpresa VARCHAR(100) #NOT NULL,
+  ,logradouroEmpresa VARCHAR(120) #NOT NULL,
+  ,numeroEmpresa INT #NOT NULL,
+  ,complementoEmpresa VARCHAR(255),
+  PRIMARY KEY (idEmpresa));
+    
+CREATE TABLE industria (
+  idIndustria INT NOT NULL AUTO_INCREMENT,
+  nomeIndustria VARCHAR(255) NOT NULL,
+  emailIndustria VARCHAR(255) NOT NULL,
+  senhaIndustria VARCHAR(45) NOT NULL,
+  CNPJIndustria CHAR(14) NOT NULL,
+  CEPIndustria CHAR(8) NOT NULL,
+  estadoIndustria VARCHAR(100) #NOT NULL,
+  ,cidadeIndustria VARCHAR(100) #NOT NULL,
+  ,logradouroIndustria VARCHAR(120) #NOT NULL,
+  ,numeroIndustria INT #NOT NULL,
+  ,complementoIndustria VARCHAR(255),
+  PRIMARY KEY (idIndustria));
+
+CREATE TABLE centrodeReciclagem (
+  idCentrodeReciclagem INT NOT NULL AUTO_INCREMENT,
+  nomeCentrodeReciclagem VARCHAR(255) NOT NULL,
+  emailCentrodeReciclagem VARCHAR(255) NOT NULL,
+  senhaCentrodeReciclagem VARCHAR(45) NOT NULL,
+  CNPJCentrodeReciclagem CHAR(14) NOT NULL,
+  CEPCentrodeReciclagem CHAR(8) NOT NULL,
+  estadoCentrodeReciclagem VARCHAR(100) #NOT NULL,
+  ,cidadeCentrodeReciclagem VARCHAR(100) #NOT NULL,
+  ,logradouroCentrodeReciclagem VARCHAR(120) #NOT NULL,
+  ,numeroCentrodeReciclagem INT #NOT NULL,
+  ,complementoCentrodeReciclagem VARCHAR(255),
+  PRIMARY KEY (idCentrodeReciclagem));
+  
+CREATE TABLE agendamento (
+  idAgendamento INT NOT NULL AUTO_INCREMENT,
+  dataAgendamento DATE NOT NULL,
+  horarioAgendamento TIME NOT NULL,
+  industria_idIndustria INT,
+  /*pessoaFisica_idPessoaFisica INT,*/
+  empresa_idEmpresa INT,
+  centrodeReciclagem_idCentrodeReciclagem INT,
+  PRIMARY KEY (idAgendamento, dataAgendamento, horarioAgendamento),
+  CONSTRAINT fk_agendamento_industria
+    FOREIGN KEY (industria_idIndustria)
+    REFERENCES industria (idIndustria)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  /*CONSTRAINT fk_agendamento_pessoaFisica
+    FOREIGN KEY (pessoaFisica_idPessoaFisica)
+    REFERENCES pessoaFisica (idPessoaFisica)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,*/
+  CONSTRAINT fk_agendamento_empresa
+    FOREIGN KEY (empresa_idEmpresa)
+    REFERENCES empresa (IdEmpresa)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_agendamento_centrodeReciclagem
+    FOREIGN KEY (centrodeReciclagem_idCentrodeReciclagem)
+    REFERENCES centrodeReciclagem (idCentrodeReciclagem)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+    
+    select * from empresa;
+    
+    insert into empresa (nomeEmpresa, emailEmpresa, senhaEmpresa, CNPJEmpresa, CEPEmpresa, estadoEmpresa, cidadeEmpresa, logradouroEmpresa, numeroEmpresa, complementoEmpresa) 
+    values ('SENAI CTTI', 'regularidade@fiemg.com.br', 'Senai471ctti&', '03773700000530', '30160041', 'Minas Gerais', 'Belo Horizonte', 'Rua Rio De Janeiro', '471', 'Andar 13 e 14');
+    
+    select * from pessoaFisica;
+    
+    insert into pessoaFisica (nomePessoaFisica, emailPessoaFisica, senhaPessoaFisica, CEPPessoaFisica, estadoPessoaFisica, cidadePessoaFisica, logradouroPessoaFisica, numeroPessoaFisica, complementoPessoaFisica) 
+    values ('Arthur Vinícius', 'arthurvnverissimo23@gmail,com', 'green2507hub#', '30642280', 'Minas Gerais', 'Belo Horizonte', 'Rua Helena de OLiveira', '254', '');
+    
+    select * from industria;
+    
+    insert into industria (nomeIndustria, emailIndustria, senhaIndustria, CNPJIndustria, CEPIndustria, estadoIndustria, cidadeIndustria, logradouroIndustria, numeroIndustria, complementoIndustria) 
+    values ('JFA ELETRONICOS', 'andersoncamelo@gmail.com', 'jfa12345678', '06164639000199', '30810000', 'Minas Gerais', 'Belo Horizonte', 'Rua Flor das Pedras', '175', '');
+    
+    select * from centrodeReciclagem;
+    
+    insert into centrodeReciclagem 
+    (nomeCentrodeReciclagem, emailCentrodeReciclagem, senhaCentrodeReciclagem, CNPJCentrodeReciclagem, CEPCentrodeReciclagem, estadoCentrodeReciclagem, cidadeCentrodeReciclagem, logradouroCentrodeReciclagem, numeroCentrodeReciclagem, complementoCentrodeReciclagem) 
+    values ('E-Mile Reciclagem de Eletroeletronicos', 'administrativo@emile.net.br', 'e123mile', '12445504000102', '32654805', 'Minas Gerais', 'Betim', 'Avenida Fausto Ribeiro da Silva', '1145', '');
+    INSERT INTO centrodeReciclagem 
+    (nomeCentrodeReciclagem, emailCentrodeReciclagem, senhaCentrodeReciclagem, CNPJCentrodeReciclagem, CEPCentrodeReciclagem, estadoCentrodeReciclagem, cidadeCentrodeReciclagem, logradouroCentrodeReciclagem, numeroCentrodeReciclagem, complementoCentrodeReciclagem) 
+VALUES
+    ("Loja Vivo / Loja Claro - Shopping Cidade", "exemplo@email.com", "senha123", "CNPJ12345678901234", "30190060", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 123, "Complemento"),
+    ("Loja Vivo", "exemplo@email.com", "senha123", "CNPJ12345678901234", "30130002", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 456, "Complemento"),
+    ("Magazine Luiza", "exemplo@email.com", "senha123", "CNPJ12345678901234", "30170120", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 789, "Complemento"),
+    ("Loja Claro", "exemplo@email.com", "senha123", "CNPJ12345678901234", "30130000", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 1011, "Complemento"),
+    ("Loja Vivo", "exemplo@email.com", "senha123", "CNPJ12345678901234", "37270000", "Minas Gerais", "Outra Cidade", "Nome da Rua", 1213, "Complemento"),
+    ("Loja Vivo", "exemplo@email.com", "senha123", "CNPJ12345678901234", "78575000", "Outro Estado", "Outra Cidade", "Nome da Rua", 1415, "Complemento"),
+    ("Loja Vivo - Diamond Mall", "exemplo@email.com", "senha123", "CNPJ12345678901234", "30180001", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 1617, "Complemento"),
+    ("Loja Vivo - Boulevard Shopping", "exemplo@email.com", "senha123", "CNPJ12345678901234", "30260000", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 1819, "Complemento"),
+    ("Loja Vivo", "exemplo@email.com", "senha123", "CNPJ12345678901234", "30140000", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 2021, "Complemento"),
+    -- Adicione os demais registros conforme necessário
+    ("Estacionamento Supermercado Supernosso", "exemplo@email.com", "senha123", "CNPJ12345678901234", "30310010", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 2223, "Complemento"),
+    ("Assistência técnica Eletrogel", "exemplo@email.com", "senha123", "CNPJ12345678901234", "3130122", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 2425, "Complemento"),
+    ("Loja Vivo / Loja Claro - Shopping Del Rey", "exemplo@email.com", "senha123", "CNPJ12345678901234", "31250010", "Minas Gerais", "Belo Horizonte", "Nome da Rua", 2627, "Complemento"),
+    -- Continue adicionando os demais registros conforme necessário
+    ("E-Mile Reciclagem de Eletroeletronicos", "administrativo@emile.net.br", "e123mile", "12445504000102", "32654805", "Minas Gerais", "Betim", "Avenida Fausto Ribeiro da Silva", 1145, "");
+
+    
+    /*Agendamento por parte de indústria*/
+    INSERT INTO agendamento (dataAgendamento, horarioAgendamento, industria_idIndustria, centrodeReciclagem_idCentrodeReciclagem)
+    VALUES ("2023-10-18", "15:00", 1, 1);
+    
+    INSERT INTO agendamento (dataAgendamento, horarioAgendamento, industria_idIndustria, centrodeReciclagem_idCentrodeReciclagem) 
+    VALUES ('2023-10-19', '14:00', 3, 3);
+    
+    SELECT * FROM agendamento;
+    
+    SELECT
+    a.idAgendamento,
+    a.dataAgendamento,
+    a.horarioAgendamento,
+    i.nomeIndustria,
+    e.nomeEmpresa,
+    cr.nomeCentrodeReciclagem
+	FROM
+    agendamento a
+    LEFT JOIN industria i ON a.industria_idIndustria = i.idIndustria
+    LEFT JOIN empresa e ON a.empresa_idEmpresa = e.idEmpresa
+    LEFT JOIN centrodeReciclagem cr ON a.centrodeReciclagem_idCentrodeReciclagem = cr.idCentrodeReciclagem;
