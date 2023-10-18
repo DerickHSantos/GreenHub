@@ -1,2 +1,0 @@
-v0.1
-Começo da base do projeto
