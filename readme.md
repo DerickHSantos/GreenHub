@@ -6,8 +6,8 @@ Site com login, informações sobre reciclagem, mapa usando a api do google maps
 Site em HTML, CSS e JS com db MySQL.
 
 Participantes:
-Arthur Vinícius
-Bernardo Macedo
-Dérick Heliodoro
-Gabriel França
-Giordano Dorneles
+Arthur Vinícius,
+Bernardo Macedo,
+Dérick Heliodoro,
+Gabriel França,
+Giordano Dorneles.
