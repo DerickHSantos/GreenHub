@@ -186,7 +186,7 @@ function addPontosColetaAoMapa(pontosColeta) {
       throw new Error('CEP não informado');
     }
 
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${cep}&key=AIzaSyBcvGFK7tDzC21apkaruZpGlMJgROyXphU`;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${cep}&key= /*Place key here!*/`;
 
     return axios.get(url)
     
